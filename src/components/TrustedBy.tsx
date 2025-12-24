@@ -50,7 +50,10 @@ export default function TrustedBy() {
               : { component: "div" as const };
 
             return (
-              <Grid item key={logo.name} xs={6} sm={4} md={3} lg={2}>
+              <Grid
+                key={logo.name}
+                size={{ xs: 6, sm: 4, md: 3, lg: 2 }}
+              >
                 <Paper
                   variant="outlined"
                   {...linkProps}
