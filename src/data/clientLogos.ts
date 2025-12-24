@@ -3,21 +3,24 @@ export type ClientLogo = {
   src: string;
   href?: string;
   invertOnDark?: boolean;
+  tagline?: string;
 };
 
 export const clientLogos: ClientLogo[] = [
   {
     name: "Company A",
     src: "/clients/company-a.svg",
-    href: "https://example.com",
+    tagline: "B2B SaaS",
   },
   {
     name: "Company B",
     src: "/clients/company-b.svg",
+    tagline: "Retail Tech",
   },
   {
     name: "Company C",
     src: "/clients/company-c.svg",
     invertOnDark: true,
+    tagline: "Manufacturing",
   },
 ];
