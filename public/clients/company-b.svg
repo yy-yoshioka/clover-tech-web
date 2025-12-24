@@ -1,0 +1,15 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="240"
+  height="80"
+  viewBox="0 0 240 80"
+  role="img"
+  aria-label="Company B logo"
+>
+  <rect width="240" height="80" rx="16" fill="#f4f4f5" />
+  <circle cx="40" cy="40" r="22" fill="#0f172a" />
+  <path
+    d="M80 26h96v8H80zM80 40h80v8H80zM80 54h64v8H80z"
+    fill="#0f172a"
+  />
+</svg>
