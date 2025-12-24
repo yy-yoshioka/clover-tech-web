@@ -1,0 +1,13 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="240"
+  height="80"
+  viewBox="0 0 240 80"
+  role="img"
+  aria-label="Client logo placeholder"
+>
+  <rect width="240" height="80" rx="18" fill="#e2e8f0" />
+  <rect x="18" y="18" width="44" height="44" rx="10" fill="#94a3b8" />
+  <rect x="76" y="26" width="128" height="8" rx="4" fill="#94a3b8" />
+  <rect x="76" y="42" width="96" height="8" rx="4" fill="#cbd5f5" />
+</svg>

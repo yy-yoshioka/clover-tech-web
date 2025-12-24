@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
+import AppThemeProvider from "@/src/components/ThemeProvider";
+
 const manrope = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -33,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}
       >
-        {children}
+        <AppThemeProvider>{children}</AppThemeProvider>
       </body>
     </html>
   );

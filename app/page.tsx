@@ -1,15 +1,25 @@
-import Hero from "@/src/components/Hero";
-import Services from "@/src/components/Services";
-import TrustedBy from "@/src/components/TrustedBy";
+import { Box } from "@mui/material";
+
+import ContactCTA from "@/src/components/sections/ContactCTA";
+import FAQ from "@/src/components/sections/FAQ";
+import Hero from "@/src/components/sections/Hero";
+import MainProduct from "@/src/components/sections/MainProduct";
+import Offerings from "@/src/components/sections/Offerings";
+import Process from "@/src/components/sections/Process";
+import Services from "@/src/components/sections/Services";
+import TrustedBy from "@/src/components/sections/TrustedBy";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <main className="flex flex-col">
-        <Hero />
-        <TrustedBy />
-        <Services />
-      </main>
-    </div>
+    <Box component="main" sx={{ bgcolor: "background.default", color: "text.primary" }}>
+      <Hero />
+      <TrustedBy />
+      <Offerings />
+      <Services />
+      <MainProduct />
+      <Process />
+      <FAQ />
+      <ContactCTA />
+    </Box>
   );
 }
