@@ -43,7 +43,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 }, bgcolor: "background.paper" }}>
+    <Box component="section" id="faq" sx={{ py: { xs: 7, md: 10 }, bgcolor: "background.paper" }}>
       <Container maxWidth="lg">
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
           <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>
