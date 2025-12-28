@@ -3,7 +3,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 
 const navItems = [
   { label: "サービス", href: "/#services" },
-  { label: "実績", href: "/#clients" },
+  { label: "開発実績", href: "/#case-studies" },
   { label: "プロセス", href: "/#process" },
   { label: "FAQ", href: "/#faq" },
 ];
