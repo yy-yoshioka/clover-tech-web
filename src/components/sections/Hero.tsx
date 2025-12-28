@@ -1,7 +1,5 @@
 import { Box, Button, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 
-import Header1 from "@/src/components/Header1";
-
 export default function Hero() {
   return (
     <Box
@@ -52,9 +50,15 @@ export default function Hero() {
                   letterSpacing: "0.2em",
                 }}
               />
-              <Header1>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: "2.6rem", sm: "3.2rem", md: "3.8rem" },
+                  lineHeight: 1.1,
+                }}
+              >
                 開発とデータ基盤で、営業を加速する。
-              </Header1>
+              </Typography>
               <Typography variant="body1" sx={{ color: "text.secondary", fontSize: "1.05rem" }}>
                 受託アプリ開発・開発リソース提供・データ収集/整形。営業代行の現場をソフトウェアで支えます。
               </Typography>
