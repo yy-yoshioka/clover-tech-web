@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
+import Header from "@/src/components/Header";
+import Footer from "@/src/components/Footer";
 import AppThemeProvider from "@/src/components/ThemeProvider";
 
 const manrope = Manrope({
@@ -23,6 +25,10 @@ export const metadata: Metadata = {
   title: "クローバー合同会社 | デジタルパートナー",
   description:
     "クローバー合同会社は、戦略設計からUI/UX、開発、運用まで一貫して支援するテクノロジーパートナーです。",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -35,7 +41,11 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}
       >
-        <AppThemeProvider>{children}</AppThemeProvider>
+        <AppThemeProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AppThemeProvider>
       </body>
     </html>
   );

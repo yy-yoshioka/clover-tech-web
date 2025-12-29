@@ -5,7 +5,7 @@ const resourceFlow = ["要件/役割確認", "参画設計", "実装推進", "�
 
 export default function Process() {
   return (
-    <Box component="section" sx={{ py: { xs: 7, md: 10 } }}>
+    <Box component="section" id="process" sx={{ py: { xs: 7, md: 10 } }}>
       <Container maxWidth="lg">
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
           <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>

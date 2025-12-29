@@ -1,6 +1,25 @@
-import { Box, Button, Chip, Container, Grid, Stack, Typography } from "@mui/material";
+"use client";
+
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
+
+import { brandColors } from "@/src/theme/colors";
+import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 
 export default function Hero() {
+  const cloverDot = `radial-gradient(circle at 30% 30%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 70% 30%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 30% 70%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 70% 70%, ${brandColors.primary} 30%, transparent 31%)`;
+  const bullets = [
+    "業務アプリの受託開発（Web/管理画面/API）",
+    "要件整理 → 設計 → 実装 → 運用まで一気通貫",
+    "データ収集・整形・可視化にも対応",
+  ];
+
+  const menu = [
+    { title: "受託開発", desc: "AI×業務アプリ／管理画面／CRM／可視化" },
+    { title: "開発リソース", desc: "準委任／チーム参画／保守運用" },
+    { title: "データ収集", desc: "スクレイピング／整形／要約" },
+  ];
+
   return (
     <Box
       component="section"
@@ -8,143 +27,212 @@ export default function Hero() {
         position: "relative",
         overflow: "hidden",
         py: { xs: 8, md: 12 },
-        background:
-          "linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(20,184,166,0.16) 40%, rgba(248,250,252,1) 100%)",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: -120,
-          right: -120,
-          width: 260,
-          height: 260,
-          borderRadius: "50%",
-          background: "rgba(45, 212, 191, 0.2)",
-          filter: "blur(20px)",
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: -140,
-          left: -120,
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          background: "rgba(56, 189, 248, 0.16)",
-          filter: "blur(10px)",
-        }}
-      />
-      <Container maxWidth="lg" sx={{ position: "relative" }}>
+      <CloverBackdrop variant="hero" />
+
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Grid container spacing={{ xs: 5, md: 8 }} alignItems="center">
+          {/* Left: Message */}
           <Grid size={{ xs: 12, md: 7 }}>
-            <Stack spacing={3}>
-              <Chip
-                label="Clover Tech"
+            <Stack spacing={2.8} sx={{ alignItems: { xs: "flex-start", md: "center" } }}>
+              <Box
                 sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1,
                   width: "fit-content",
-                  bgcolor: "rgba(255,255,255,0.8)",
-                  border: "1px solid rgba(15, 23, 42, 0.08)",
-                  fontWeight: 600,
-                  letterSpacing: "0.2em",
+                  px: 1.6,
+                  py: 0.7,
+                  borderRadius: 999,
+                  bgcolor: "rgba(255,255,255,0.85)",
+                  border: `1px solid ${alpha(brandColors.primary, 0.2)}`,
+                  boxShadow: `0 12px 32px ${alpha(brandColors.secondary, 0.12)}`,
                 }}
-              />
+              >
+                <Box
+                  sx={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: "50%",
+                    background: cloverDot,
+                  }}
+                />
+                <Typography
+                  variant="caption"
+                  sx={{ letterSpacing: "0.26em", fontWeight: 700, color: "text.secondary" }}
+                >
+                  CLOVER TECH
+                </Typography>
+              </Box>
               <Typography
                 variant="h2"
                 sx={{
-                  fontSize: { xs: "2.6rem", sm: "3.2rem", md: "3.8rem" },
-                  lineHeight: 1.1,
+                  fontSize: { xs: "2.4rem", sm: "3rem", md: "3.6rem" },
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.02em",
+                  textAlign: { xs: "left", md: "center" },
                 }}
               >
-                開発とデータ基盤で、営業を加速する。
+                業務アプリの
+                <Box
+                  component="span"
+                  sx={{
+                    display: "block",
+                    background:
+                      `linear-gradient(120deg, ${brandColors.primary} 0%, ${brandColors.secondary} 100%)`,
+                    WebkitBackgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  受託開発
+                </Box>
               </Typography>
-              <Typography variant="body1" sx={{ color: "text.secondary", fontSize: "1.05rem" }}>
-                受託アプリ開発・開発リソース提供・データ収集/整形。営業代行の現場をソフトウェアで支えます。
+
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "text.secondary",
+                  fontSize: "1.08rem",
+                  maxWidth: 520,
+                  textAlign: { xs: "left", md: "center" },
+                  mx: { md: "auto" },
+                }}
+              >
+                管理画面・CRM・データ可視化・業務自動化を、最短で形にします。
               </Typography>
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-                <Button variant="contained" color="primary" href="/contact">
-                  無料相談
-                </Button>
-                <Button variant="outlined" color="primary" href="#services">
-                  サービスを見る
-                </Button>
-              </Stack>
-              <Grid container spacing={2}>
-                {[
-                  "受託開発とチーム参画の両輪",
-                  "営業データを軸に成果を支援",
-                  "要件整理から運用改善まで",
-                  "スモールスタートで素早く検証",
-                ].map((item) => (
-                  <Grid key={item} size={{ xs: 12, sm: 6 }}>
+
+              <Box
+                component="ul"
+                sx={{
+                  m: 0,
+                  p: 0,
+                  listStyle: "none",
+                  display: "grid",
+                  gap: 1.5,
+                  maxWidth: 520,
+                  width: "100%",
+                  mx: { md: "auto" },
+                }}
+              >
+                {bullets.map((b) => (
+                  <Box key={b} component="li" sx={{ display: "flex", gap: 1.5 }}>
                     <Box
                       sx={{
-                        border: "1px solid rgba(15, 23, 42, 0.08)",
-                        borderRadius: 3,
-                        p: 2,
-                        bgcolor: "rgba(255,255,255,0.85)",
-                        fontSize: "0.9rem",
-                        color: "text.secondary",
+                        mt: 0.8,
+                        width: 14,
+                        height: 14,
+                        borderRadius: "50%",
+                        background: cloverDot,
+                        flexShrink: 0,
                       }}
+                    />
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary", textAlign: { xs: "left", md: "center" } }}
                     >
-                      {item}
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </Stack>
-          </Grid>
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Box
-              sx={{
-                borderRadius: 4,
-                border: "1px solid rgba(15, 23, 42, 0.08)",
-                bgcolor: "rgba(255,255,255,0.9)",
-                p: { xs: 3, md: 4 },
-                boxShadow: "0 30px 80px rgba(15, 23, 42, 0.12)",
-              }}
-            >
-              <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>
-                Delivery Map
-              </Typography>
-              <Typography variant="h5" sx={{ mt: 2 }}>
-                Discover → Design → Build
-              </Typography>
-              <Typography variant="body2" sx={{ mt: 1, color: "text.secondary" }}>
-                事業と営業の現場に合わせて、最短距離で成果に繋げます。
-              </Typography>
-              <Stack spacing={2} sx={{ mt: 3 }}>
-                {[
-                  {
-                    title: "戦略整理",
-                    description: "売れるために必要な情報と導線を設計。",
-                  },
-                  {
-                    title: "実装と検証",
-                    description: "MVPや営業支援ツールを高速に構築。",
-                  },
-                  {
-                    title: "運用改善",
-                    description: "データ起点で改善を続ける体制づくり。",
-                  },
-                ].map((item) => (
-                  <Box
-                    key={item.title}
-                    sx={{
-                      borderRadius: 3,
-                      border: "1px solid rgba(15, 23, 42, 0.08)",
-                      p: 2,
-                      bgcolor: "background.paper",
-                    }}
-                  >
-                    <Typography variant="subtitle1">{item.title}</Typography>
-                    <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                      {item.description}
+                      {b}
                     </Typography>
                   </Box>
                 ))}
+              </Box>
+
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={2}
+                sx={{ pt: 1, alignItems: { xs: "stretch", md: "center" } }}
+              >
+                <Button variant="contained" color="primary" size="large" href="/contact">
+                  相談する
+                </Button>
+                <Button variant="outlined" color="primary" size="large" href="#case-studies">
+                  実績を見る
+                </Button>
+                <Button
+                  variant="text"
+                  color="primary"
+                  href="#services"
+                  sx={{ justifyContent: "flex-start" }}
+                >
+                  対応範囲を見る
+                </Button>
               </Stack>
+            </Stack>
+          </Grid>
+
+          {/* Right: Menu */}
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Box
+              sx={{
+                position: "relative",
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: -4,
+                  borderRadius: 5,
+                  background:
+                    `linear-gradient(130deg, ${alpha(
+                      brandColors.primary,
+                      0.28
+                    )}, ${alpha(brandColors.secondary, 0.18)})`,
+                  filter: "blur(18px)",
+                  opacity: 0.7,
+                }}
+              />
+              <Box
+                sx={{
+                  position: "relative",
+                  borderRadius: 4,
+                  border: `1px solid ${alpha(brandColors.primary, 0.2)}`,
+                  bgcolor: "rgba(255,255,255,0.86)",
+                  p: { xs: 3, md: 4 },
+                  boxShadow: "0 30px 80px rgba(15, 23, 42, 0.16)",
+                  backdropFilter: "blur(12px)",
+                }}
+              >
+                <Typography
+                  variant="overline"
+                  sx={{ color: "text.secondary", letterSpacing: "0.2em" }}
+                >
+                  Services
+                </Typography>
+                <Typography variant="h5" sx={{ mt: 2 }}>
+                  提供メニュー
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: 1, color: "text.secondary" }}
+                >
+                  まずは小さく作り、改善を回す形で支援します。
+                </Typography>
+
+                <Stack spacing={2} sx={{ mt: 3 }}>
+                  {menu.map((item) => (
+                    <Box
+                      key={item.title}
+                      sx={{
+                        borderRadius: 3,
+                        border: "1px solid rgba(15, 23, 42, 0.08)",
+                        p: 2,
+                        bgcolor: "background.paper",
+                        boxShadow: "0 12px 30px rgba(15, 23, 42, 0.08)",
+                      }}
+                    >
+                      <Typography variant="subtitle1" sx={{ lineHeight: 1.2 }}>
+                        {item.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", mt: 0.25 }}
+                      >
+                        {item.desc}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
             </Box>
           </Grid>
         </Grid>
