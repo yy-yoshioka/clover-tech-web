@@ -1,11 +1,12 @@
-import Link from "next/link";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
+
+import AppLink from "@/src/components/AppLink";
 
 const navItems = [
   { label: "サービス", href: "/#services" },
   { label: "開発実績", href: "/#case-studies" },
-  { label: "プロセス", href: "/#process" },
   { label: "FAQ", href: "/#faq" },
+  { label: "会社概要", href: "/about" },
 ];
 
 export default function Header() {
@@ -28,7 +29,7 @@ export default function Header() {
           justifyContent="space-between"
           sx={{ py: { xs: 1.5, md: 2 } }}
         >
-          <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <AppLink href="/" underline="none" color="inherit" sx={{ display: "inline-flex" }}>
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <Box
                 component="img"
@@ -45,7 +46,7 @@ export default function Header() {
                 </Typography>
               </Box>
             </Stack>
-          </Link>
+          </AppLink>
           <Stack direction="row" alignItems="center" spacing={1.5}>
             <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
               {navItems.map((item) => (

@@ -3,6 +3,7 @@ import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/src/components/Header";
+import Footer from "@/src/components/Footer";
 import AppThemeProvider from "@/src/components/ThemeProvider";
 
 const manrope = Manrope({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <AppThemeProvider>
           <Header />
           {children}
+          <Footer />
         </AppThemeProvider>
       </body>
     </html>
