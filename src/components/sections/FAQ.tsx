@@ -7,61 +7,100 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { alpha } from "@mui/material/styles";
+
+import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
+import { brandColors } from "@/src/theme/colors";
 
 const faqs = [
   {
-    question: "受託開発と開発リソース提供（準委任）の違いは？",
+    question: "どんなアプリを作れますか？",
     answer:
-      "受託は成果物ベースで納品まで責任を持つ形式、準委任はチームに参画して開発プロセスを支援する形式です。",
+      "管理画面/CRM/業務アプリ/データ可視化など、業務で使うアプリ全般に対応します。",
   },
   {
-    question: "どの程度の期間で納品/立ち上げできますか？",
+    question: "相談〜着手までの流れは？",
     answer:
-      "要件の規模によりますが、MVPであれば数週間〜2ヶ月程度での立ち上げが可能です。",
+      "ヒアリング → 概算お見積り → 要件整理 → 着手の流れです。",
   },
   {
-    question: "どの技術スタックに対応していますか？",
+    question: "期間の目安は？",
     answer:
-      "Next.js/TypeScriptを中心に、バックエンドやデータ基盤構築も含めて柔軟に対応します。",
+      "MVPで2〜6週間程度が目安です。規模や要件によって前後します。",
   },
   {
-    question: "スクレイピングは合法ですか？",
+    question: "予算の目安は？",
     answer:
-      "利用規約や法的制約を遵守し、必要に応じて許諾・代替手段を検討した上で設計します。",
+      "要件により変動しますが、まずは小さく始めるプランをご提案します。最低レンジは数十万円からです。",
   },
   {
-    question: "データはどの形式で納品されますか？",
+    question: "既存システムの改修や運用も可能？",
     answer:
-      "CSV/スプレッドシート/JSONなど用途に合わせて納品します。継続収集も対応可能です。",
+      "可能です。保守運用や改善提案まで継続的に支援します。",
   },
   {
-    question: "相談だけでも可能ですか？",
+    question: "データ収集（スクレイピング）は対応できる？",
     answer:
-      "はい。課題整理の段階からご相談いただけます。最適な進め方をご提案します。",
+      "可能です。利用規約や法的制約を遵守した上で設計します。",
+  },
+  {
+    question: "NDAは可能？",
+    answer: "可能です。",
   },
 ];
 
 export default function FAQ() {
   return (
-    <Box component="section" id="faq" sx={{ py: { xs: 7, md: 10 }, bgcolor: "background.paper" }}>
-      <Container maxWidth="lg">
+    <Box
+      component="section"
+      id="faq"
+      sx={{ py: { xs: 7, md: 10 }, position: "relative", overflow: "hidden" }}
+    >
+      <CloverBackdrop variant="section" />
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-          <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>
+          <Typography variant="overline" sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}>
             FAQ
           </Typography>
-          <Typography variant="h4">よくある質問</Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            受託開発・準委任・データ収集に関するご質問をまとめました。
+          <Typography variant="h4" sx={{ color: "text.primary" }}>
+            よくある質問
+          </Typography>
+          <Typography variant="body2" sx={{ color: brandColors.secondary }}>
+            受託開発をご検討中のお客様向けに、主要なご質問をまとめました。
           </Typography>
         </Stack>
         <Stack spacing={2} sx={{ mt: { xs: 3, md: 4 } }}>
           {faqs.map((faq) => (
-            <Accordion key={faq.question} disableGutters>
-              <AccordionSummary>
-                <Typography variant="subtitle1">{faq.question}</Typography>
+            <Accordion
+              key={faq.question}
+              disableGutters
+              sx={{
+                borderRadius: 3,
+                border: `1px solid ${alpha(brandColors.primary, 0.16)}`,
+                bgcolor: "rgba(255,255,255,0.9)",
+                boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+                "&:before": { display: "none" },
+              }}
+            >
+              <AccordionSummary sx={{ px: { xs: 2, md: 3 }, py: { xs: 1, md: 1.5 } }}>
+                <Stack direction="row" spacing={1.5} alignItems="center">
+                  <Box
+                    sx={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      bgcolor: brandColors.primary,
+                      boxShadow: `0 0 0 6px ${alpha(brandColors.primary, 0.15)}`,
+                      flexShrink: 0,
+                    }}
+                  />
+                  <Typography variant="subtitle1" sx={{ color: "text.primary" }}>
+                    {faq.question}
+                  </Typography>
+                </Stack>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <AccordionDetails sx={{ px: { xs: 2, md: 3 }, pt: 0, pb: { xs: 2, md: 2.5 } }}>
+                <Typography variant="body2" sx={{ color: brandColors.secondary }}>
                   {faq.answer}
                 </Typography>
               </AccordionDetails>
