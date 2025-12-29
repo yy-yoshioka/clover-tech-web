@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   title: "クローバー合同会社 | デジタルパートナー",
   description:
     "クローバー合同会社は、戦略設計からUI/UX、開発、運用まで一貫して支援するテクノロジーパートナーです。",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

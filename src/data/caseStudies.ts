@@ -51,7 +51,7 @@ export type CaseStudyArchiveItem = {
 export const caseStudies: CaseStudiesContent = {
   caption: "Selected Technical Case Studies",
   title: "社会的インパクトのある複雑な課題を、技術の力で解決した実績",
-  subtitle: "社名は伏せ、どのようなシステムを構築したかにフォーカスしています。",
+  subtitle: "社会インパクトのある複雑な課題を、技術の力で解決した実績",
   cases: [
     {
       id: "case-urbanx",
@@ -132,7 +132,8 @@ export const caseStudiesCta: CaseStudiesCta = {
 export const caseStudyArchiveContent: CaseStudyArchiveContent = {
   caption: "Case Study Archive",
   title: "その他の事例",
-  subtitle: "非公開案件を中心に、業界ごとの技術課題に対してどのように設計・実装したかをまとめています。",
+  subtitle:
+    "非公開案件を中心に、業界ごとの技術課題に対してどのように設計・実装したかをまとめています。",
 };
 
 export const caseStudyArchive: CaseStudyArchiveItem[] = [

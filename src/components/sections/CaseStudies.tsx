@@ -18,20 +18,32 @@ const accentTheme = {
 
 type CaseStudiesProps = {
   showCta?: boolean;
+  showSubtitle?: boolean;
 };
 
-export default function CaseStudies({ showCta = true }: CaseStudiesProps) {
+export default function CaseStudies({
+  showCta = true,
+  showSubtitle = false,
+}: CaseStudiesProps) {
   return (
     <Box component="section" id="case-studies" sx={{ py: { xs: 7, md: 10 } }}>
       <Container maxWidth="lg">
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-          <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>
-            {caseStudies.caption}
+          <Typography
+            variant="overline"
+            sx={{ color: "text.secondary", letterSpacing: "0.2em" }}
+          >
+            Case Studies
           </Typography>
-          <Typography variant="h4">{caseStudies.title}</Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary", maxWidth: 720 }}>
-            {caseStudies.subtitle}
-          </Typography>
+          <Typography variant="h4">開発実績</Typography>
+          {showSubtitle && (
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary", maxWidth: 720 }}
+            >
+              匿名化した事例です。
+            </Typography>
+          )}
         </Stack>
         <Stack spacing={{ xs: 4, md: 6 }} sx={{ mt: { xs: 4, md: 6 } }}>
           {caseStudies.cases.map((item, index) => {
@@ -55,17 +67,28 @@ export default function CaseStudies({ showCta = true }: CaseStudiesProps) {
                     <Stack spacing={2}>
                       <Typography
                         variant="overline"
-                        sx={{ color: accent.chip, fontWeight: 600, letterSpacing: "0.12em" }}
+                        sx={{
+                          color: accent.chip,
+                          fontWeight: 600,
+                          letterSpacing: "0.12em",
+                        }}
                       >
                         Case {index + 1}
                       </Typography>
                       <Typography variant="h5">{item.title}</Typography>
-                      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary" }}
+                      >
                         {item.description}
                       </Typography>
                       <Typography
                         variant="subtitle2"
-                        sx={{ color: "text.secondary", borderLeft: `3px solid ${accent.chip}`, pl: 2 }}
+                        sx={{
+                          color: "text.secondary",
+                          borderLeft: `3px solid ${accent.chip}`,
+                          pl: 2,
+                        }}
                       >
                         {item.role}
                       </Typography>
@@ -75,7 +98,10 @@ export default function CaseStudies({ showCta = true }: CaseStudiesProps) {
                     <Box
                       sx={{
                         display: "grid",
-                        gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
+                        gridTemplateColumns: {
+                          xs: "1fr",
+                          sm: "repeat(2, minmax(0, 1fr))",
+                        },
                         gap: { xs: 2, md: 3 },
                       }}
                     >
@@ -83,7 +109,10 @@ export default function CaseStudies({ showCta = true }: CaseStudiesProps) {
                         <Box
                           key={card.title}
                           sx={{
-                            gridColumn: cardIndex === 2 ? { xs: "auto", sm: "span 2" } : "auto",
+                            gridColumn:
+                              cardIndex === 2
+                                ? { xs: "auto", sm: "span 2" }
+                                : "auto",
                           }}
                         >
                           <CaseStudyCard item={card} accent={item.accent} />
@@ -97,7 +126,11 @@ export default function CaseStudies({ showCta = true }: CaseStudiesProps) {
           })}
         </Stack>
         {showCta ? (
-          <Stack direction="row" justifyContent="center" sx={{ mt: { xs: 4, md: 5 } }}>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            sx={{ mt: { xs: 4, md: 5 } }}
+          >
             <Button variant="outlined" size="large" href={caseStudiesCta.href}>
               {caseStudiesCta.label}
             </Button>

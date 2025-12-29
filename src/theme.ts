@@ -1,14 +1,16 @@
 import { createTheme } from "@mui/material/styles";
 
+import { brandColors } from "./theme/colors";
+
 const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#0f766e",
+      main: brandColors.primary,
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#0ea5a4",
+      main: brandColors.secondary,
     },
     background: {
       default: "#f5f7fb",
