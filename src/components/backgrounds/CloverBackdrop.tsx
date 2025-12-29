@@ -7,7 +7,32 @@ type CloverBackdropProps = {
   variant?: "hero" | "section";
 };
 
-const variants = {
+type CloverBlob = {
+  top?: number;
+  right?: number | string;
+  bottom?: number;
+  left?: number | string;
+  size: number;
+  color: string;
+  blur: number;
+};
+
+type CloverShape = {
+  top: number;
+  left?: string;
+  right?: string;
+  size: number;
+  opacity: number;
+};
+
+type CloverVariant = {
+  gradient: string;
+  dotOpacity: number;
+  blobs: CloverBlob[];
+  clovers: CloverShape[];
+};
+
+const variants: Record<"hero" | "section", CloverVariant> = {
   hero: {
     gradient: `radial-gradient(520px circle at 8% 12%, ${alpha(
       brandColors.primary,
