@@ -22,6 +22,7 @@ export default function ContactCTA() {
   return (
     <Box
       component="section"
+      id="contact"
       sx={{ py: { xs: 7, md: 10 }, position: "relative", overflow: "hidden" }}
     >
       <CloverBackdrop variant="section" />
