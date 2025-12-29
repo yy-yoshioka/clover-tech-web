@@ -18,7 +18,7 @@ const theme = createTheme({
     },
     text: {
       primary: "#0f172a",
-      secondary: "#475569",
+      secondary: brandColors.secondary,
     },
   },
   typography: {

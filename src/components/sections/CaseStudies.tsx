@@ -1,18 +1,21 @@
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 
+import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import CaseStudyCard from "@/src/components/cards/CaseStudyCard";
 import { caseStudies, caseStudiesCta } from "@/src/data/caseStudies";
+import { brandColors } from "@/src/theme/colors";
 
 const accentTheme = {
   urban: {
-    chip: "#2563eb",
-    tint: "rgba(37, 99, 235, 0.08)",
-    border: "rgba(37, 99, 235, 0.18)",
+    chip: brandColors.primary,
+    tint: alpha(brandColors.primary, 0.08),
+    border: alpha(brandColors.primary, 0.18),
   },
   secure: {
-    chip: "#0f172a",
-    tint: "rgba(15, 23, 42, 0.06)",
-    border: "rgba(15, 23, 42, 0.12)",
+    chip: brandColors.tertiary,
+    tint: alpha(brandColors.tertiary, 0.08),
+    border: alpha(brandColors.tertiary, 0.18),
   },
 } as const;
 
@@ -26,20 +29,27 @@ export default function CaseStudies({
   showSubtitle = false,
 }: CaseStudiesProps) {
   return (
-    <Box component="section" id="case-studies" sx={{ py: { xs: 7, md: 10 } }}>
-      <Container maxWidth="lg">
+    <Box
+      component="section"
+      id="case-studies"
+      sx={{ py: { xs: 7, md: 10 }, position: "relative", overflow: "hidden" }}
+    >
+      <CloverBackdrop variant="section" />
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
           <Typography
             variant="overline"
-            sx={{ color: "text.secondary", letterSpacing: "0.2em" }}
+            sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
           >
             Case Studies
           </Typography>
-          <Typography variant="h4">開発実績</Typography>
+          <Typography variant="h4" sx={{ color: "text.primary" }}>
+            開発実績
+          </Typography>
           {showSubtitle && (
             <Typography
               variant="body2"
-              sx={{ color: "text.secondary", maxWidth: 720 }}
+              sx={{ color: brandColors.secondary, maxWidth: 720 }}
             >
               匿名化した事例です。
             </Typography>
@@ -75,17 +85,19 @@ export default function CaseStudies({
                       >
                         Case {index + 1}
                       </Typography>
-                      <Typography variant="h5">{item.title}</Typography>
+                      <Typography variant="h5" sx={{ color: "text.primary" }}>
+                        {item.title}
+                      </Typography>
                       <Typography
                         variant="body2"
-                        sx={{ color: "text.secondary" }}
+                        sx={{ color: brandColors.secondary }}
                       >
                         {item.description}
                       </Typography>
                       <Typography
                         variant="subtitle2"
                         sx={{
-                          color: "text.secondary",
+                          color: brandColors.secondary,
                           borderLeft: `3px solid ${accent.chip}`,
                           pl: 2,
                         }}
