@@ -75,10 +75,7 @@ export default function Footer() {
         position: "relative",
         overflow: "hidden",
         borderTop: `1px solid ${alpha(brandColors.secondary, 0.16)}`,
-        background: `linear-gradient(180deg, ${alpha(brandColors.secondary, 0.1)} 0%, ${alpha(
-          brandColors.secondary,
-          0.04
-        )} 55%, ${alpha(brandColors.cloud, 0.9)} 100%)`,
+        background: `linear-gradient(180deg, ${brandColors.mint} 0%, ${brandColors.mist} 55%, ${brandColors.cloud} 100%)`,
         color: "text.primary",
       }}
     >

@@ -60,8 +60,7 @@ export default function Header() {
         top: 0,
         zIndex: 1200,
         borderBottom: "1px solid rgba(15, 23, 42, 0.08)",
-        bgcolor: "rgba(245, 247, 251, 0.92)",
-        backdropFilter: "blur(12px)",
+        bgcolor: brandColors.cloud,
       }}
     >
       <Container maxWidth="lg">
