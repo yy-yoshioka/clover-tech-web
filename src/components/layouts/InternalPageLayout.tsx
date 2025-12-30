@@ -10,6 +10,7 @@ type InternalPageLayoutProps = {
   eyebrow: string;
   title: string;
   subtitle?: string;
+  icon?: React.ReactNode;
   align?: "left" | "center";
   titleSx?: SxProps<Theme>;
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default function InternalPageLayout({
   eyebrow,
   title,
   subtitle,
+  icon,
   align,
   titleSx,
   children,
@@ -35,6 +37,7 @@ export default function InternalPageLayout({
             eyebrow={eyebrow}
             title={title}
             subtitle={subtitle}
+            icon={icon}
             align={align}
             titleSx={titleSx}
           />

@@ -8,39 +8,59 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
+import AutoAwesomeMotionOutlinedIcon from "@mui/icons-material/AutoAwesomeMotionOutlined";
+import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
+import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
+import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import { brandColors } from "@/src/theme/colors";
 
-const faqs = [
+const faqs: Array<{
+  question: string;
+  answer: string;
+  icon: SvgIconComponent;
+}> = [
   {
+    icon: AppsOutlinedIcon,
     question: "どんなアプリを作れますか？",
     answer:
       "管理画面/CRM/業務アプリ/データ可視化など、業務で使うアプリ全般に対応します。",
   },
   {
+    icon: AutoAwesomeMotionOutlinedIcon,
     question: "相談〜着手までの流れは？",
     answer: "ヒアリング → 概算お見積り → 要件整理 → 着手の流れです。",
   },
   {
+    icon: ScheduleOutlinedIcon,
     question: "期間の目安は？",
     answer: "MVPで2〜6週間程度が目安です。規模や要件によって前後します。",
   },
   {
+    icon: PaidOutlinedIcon,
     question: "予算の目安は？",
     answer:
       "要件により変動しますが、まずは小さく始めるプランをご提案します。最低レンジは数十万円からです。",
   },
   {
+    icon: SettingsOutlinedIcon,
     question: "既存システムの改修や運用も可能？",
     answer: "可能です。保守運用や改善提案まで継続的に支援します。",
   },
   {
+    icon: ManageSearchOutlinedIcon,
     question: "データ収集（スクレイピング）は対応できる？",
     answer: "可能です。利用規約や法的制約を遵守した上で設計します。",
   },
   {
+    icon: GppGoodOutlinedIcon,
     question: "NDAは可能？",
     answer: "可能です。",
   },
@@ -56,12 +76,22 @@ export default function FAQ() {
       <CloverBackdrop variant="section" />
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-          <Typography
-            variant="overline"
-            sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            justifyContent={{ xs: "center", sm: "flex-start" }}
           >
-            FAQ
-          </Typography>
+            <HelpOutlineOutlinedIcon
+              sx={{ fontSize: 18, color: brandColors.tertiary }}
+            />
+            <Typography
+              variant="overline"
+              sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+            >
+              FAQ
+            </Typography>
+          </Stack>
           <Typography variant="h4" sx={{ color: "text.primary" }}>
             よくある質問
           </Typography>
@@ -70,7 +100,10 @@ export default function FAQ() {
           </Typography>
         </Stack>
         <Stack spacing={2} sx={{ mt: { xs: 3, md: 4 } }}>
-          {faqs.map((faq, index) => (
+          {faqs.map((faq, index) => {
+            const Icon = faq.icon;
+
+            return (
             <Accordion
               key={faq.question}
               defaultExpanded={index === 0}
@@ -108,14 +141,18 @@ export default function FAQ() {
                 <Stack direction="row" spacing={1.5} alignItems="center">
                   <Box
                     sx={{
-                      width: 10,
-                      height: 10,
+                      width: 36,
+                      height: 36,
                       borderRadius: "50%",
-                      bgcolor: brandColors.primary,
-                      boxShadow: `0 0 0 6px ${alpha(brandColors.primary, 0.15)}`,
+                      display: "grid",
+                      placeItems: "center",
+                      bgcolor: alpha(brandColors.primary, 0.12),
+                      border: `1px solid ${alpha(brandColors.primary, 0.24)}`,
                       flexShrink: 0,
                     }}
-                  />
+                  >
+                    <Icon sx={{ fontSize: 18, color: brandColors.tertiary }} />
+                  </Box>
                   <Typography
                     variant="subtitle1"
                     sx={{ color: "text.primary" }}
@@ -135,7 +172,8 @@ export default function FAQ() {
                 </Typography>
               </AccordionDetails>
             </Accordion>
-          ))}
+            );
+          })}
         </Stack>
       </Container>
     </Box>

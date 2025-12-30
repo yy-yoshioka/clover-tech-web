@@ -42,9 +42,20 @@ export default function CaseStudyCard({ item, accent }: CaseStudyCardProps) {
         >
           <CaseStudyIcon name={item.icon} />
         </Box>
-        <Typography variant="overline" sx={{ color: accentStyle.fg, letterSpacing: "0.08em" }}>
-          {item.eyebrow}
-        </Typography>
+        <Stack spacing={0.6}>
+          <Typography variant="overline" sx={{ color: accentStyle.fg, letterSpacing: "0.08em" }}>
+            {item.eyebrow}
+          </Typography>
+          <Box
+            sx={{
+              width: 40,
+              height: 2,
+              borderRadius: 999,
+              bgcolor: accentStyle.fg,
+              opacity: 0.5,
+            }}
+          />
+        </Stack>
       </Stack>
       <Typography variant="h6" sx={{ color: "text.primary" }}>
         {item.title}

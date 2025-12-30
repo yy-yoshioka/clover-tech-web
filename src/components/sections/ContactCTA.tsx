@@ -9,6 +9,7 @@ import {
   FormControl,
   FormLabel,
   Grid,
+  InputAdornment,
   MenuItem,
   Stack,
   TextField,
@@ -17,7 +18,19 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
+import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import AppLink from "@/src/components/AppLink";
@@ -29,6 +42,7 @@ export default function ContactCTA() {
   const [preferredSchedule, setPreferredSchedule] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
   const labelSx = { color: brandColors.secondary };
+  const inputIconSx = { fontSize: 18, color: brandColors.secondary };
 
   return (
     <Box
@@ -41,12 +55,17 @@ export default function ContactCTA() {
         <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
           <Grid size={{ xs: 12, md: 5 }}>
             <Stack spacing={2} sx={{ textAlign: { xs: "center", md: "left" } }}>
-              <Typography
-                variant="overline"
-                sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
-              >
-                Contact
-              </Typography>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <SupportAgentOutlinedIcon
+                  sx={{ fontSize: 18, color: brandColors.tertiary }}
+                />
+                <Typography
+                  variant="overline"
+                  sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+                >
+                  Contact
+                </Typography>
+              </Stack>
               <Typography variant="h4" sx={{ color: "text.primary" }}>
                 相談内容を選んで、すぐに開始
               </Typography>
@@ -62,13 +81,16 @@ export default function ContactCTA() {
                 }}
               >
                 {[
-                  "24〜48時間以内にご連絡",
-                  "NDA可能",
-                  "オンライン対応",
-                  "要件整理から支援",
+                  {
+                    label: "24〜48時間以内にご連絡",
+                    icon: AccessTimeOutlinedIcon,
+                  },
+                  { label: "NDA可能", icon: SecurityOutlinedIcon },
+                  { label: "オンライン対応", icon: VideocamOutlinedIcon },
+                  { label: "要件整理から支援", icon: TaskAltOutlinedIcon },
                 ].map((item) => (
                   <Box
-                    key={item}
+                    key={item.label}
                     sx={{
                       borderRadius: 2.5,
                       border: `1px solid ${alpha(brandColors.primary, 0.18)}`,
@@ -78,9 +100,23 @@ export default function ContactCTA() {
                       textAlign: { xs: "center", md: "left" },
                     }}
                   >
-                    <Typography variant="body2" sx={{ color: brandColors.secondary, fontWeight: 600 }}>
-                      {item}
-                    </Typography>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      justifyContent={{ xs: "center", md: "flex-start" }}
+                    >
+                      <Box
+                        component={item.icon}
+                        sx={{ fontSize: 18, color: brandColors.tertiary }}
+                      />
+                      <Typography
+                        variant="body2"
+                        sx={{ color: brandColors.secondary, fontWeight: 600 }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </Stack>
                   </Box>
                 ))}
               </Box>
@@ -118,7 +154,16 @@ export default function ContactCTA() {
                 }}
               >
                 <FormControl>
-                  <FormLabel sx={{ color: brandColors.secondary, fontWeight: 600 }}>
+                  <FormLabel
+                    sx={{
+                      color: brandColors.secondary,
+                      fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <SupportAgentOutlinedIcon sx={inputIconSx} />
                     相談種別
                   </FormLabel>
                   <ToggleButtonGroup
@@ -154,22 +199,63 @@ export default function ContactCTA() {
                     }}
                   >
                     {[
-                      { value: "contract", label: "受託開発" },
-                      { value: "resource", label: "リソース" },
-                      { value: "data", label: "データ収集" },
+                      {
+                        value: "contract",
+                        label: "受託開発",
+                        icon: WorkOutlineOutlinedIcon,
+                      },
+                      {
+                        value: "resource",
+                        label: "リソース",
+                        icon: GroupsOutlinedIcon,
+                      },
+                      {
+                        value: "data",
+                        label: "データ収集",
+                        icon: DescriptionOutlinedIcon,
+                      },
                     ].map((option) => (
                       <ToggleButton key={option.value} value={option.value}>
-                        {option.label}
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <Box
+                            component={option.icon}
+                            sx={{ fontSize: 18, color: "inherit" }}
+                          />
+                          <span>{option.label}</span>
+                        </Stack>
                       </ToggleButton>
                     ))}
                   </ToggleButtonGroup>
                 </FormControl>
                 <Grid container spacing={2}>
                   <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField label="会社名（任意）" fullWidth InputLabelProps={{ sx: labelSx }} />
+                    <TextField
+                      label="会社名（任意）"
+                      fullWidth
+                      InputLabelProps={{ sx: labelSx }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <GroupsOutlinedIcon sx={inputIconSx} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField label="氏名" fullWidth required InputLabelProps={{ sx: labelSx }} />
+                    <TextField
+                      label="氏名"
+                      fullWidth
+                      required
+                      InputLabelProps={{ sx: labelSx }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonOutlineOutlinedIcon sx={inputIconSx} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
                   </Grid>
                   <Grid size={{ xs: 12 }}>
                     <TextField
@@ -178,6 +264,13 @@ export default function ContactCTA() {
                       fullWidth
                       required
                       InputLabelProps={{ sx: labelSx }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MailOutlineOutlinedIcon sx={inputIconSx} />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
                   <Grid size={{ xs: 12 }}>
@@ -188,6 +281,13 @@ export default function ContactCTA() {
                       fullWidth
                       required
                       InputLabelProps={{ sx: labelSx }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <DescriptionOutlinedIcon sx={inputIconSx} />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
                 </Grid>
@@ -219,6 +319,13 @@ export default function ContactCTA() {
                           value={preferredSchedule}
                           onChange={(event) => setPreferredSchedule(event.target.value)}
                           InputLabelProps={{ sx: labelSx }}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <CalendarMonthOutlinedIcon sx={inputIconSx} />
+                              </InputAdornment>
+                            ),
+                          }}
                         >
                           {["未定", "1ヶ月以内", "1〜3ヶ月", "3ヶ月以上"].map((option) => (
                             <MenuItem key={option} value={option}>
@@ -235,6 +342,13 @@ export default function ContactCTA() {
                           value={budgetRange}
                           onChange={(event) => setBudgetRange(event.target.value)}
                           InputLabelProps={{ sx: labelSx }}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <PaidOutlinedIcon sx={inputIconSx} />
+                              </InputAdornment>
+                            ),
+                          }}
                         >
                           {["未定", "〜50万円", "50〜150万円", "150万円以上"].map((option) => (
                             <MenuItem key={option} value={option}>

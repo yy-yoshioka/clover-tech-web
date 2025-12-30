@@ -1,20 +1,39 @@
+"use client";
+
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 import AppLink from "@/src/components/AppLink";
 import { companyContact, companyProfile } from "@/src/data/company";
 import { brandColors } from "@/src/theme/colors";
 
-const companyLinks = [
-  { label: "会社概要", href: "/about" },
-  { label: "採用", href: "/recruit" },
-  { label: "財務情報", href: "/financials" },
-  { label: "お問い合わせ", href: "/contact" },
+const companyLinks: {
+  label: string;
+  href: string;
+  icon: SvgIconComponent;
+}[] = [
+  { label: "会社概要", href: "/about", icon: BusinessOutlinedIcon },
+  { label: "採用", href: "/recruit", icon: PersonAddAltOutlinedIcon },
+  { label: "財務情報", href: "/financials", icon: AccountBalanceOutlinedIcon },
+  { label: "お問い合わせ", href: "/contact", icon: MailOutlineOutlinedIcon },
 ];
 
-const legalLinks = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "利用規約", href: "/terms" },
+const legalLinks: {
+  label: string;
+  href: string;
+  icon: SvgIconComponent;
+}[] = [
+  { label: "Privacy Policy", href: "/privacy", icon: ShieldOutlinedIcon },
+  { label: "利用規約", href: "/terms", icon: DescriptionOutlinedIcon },
 ];
 
 const linkSx = {
@@ -130,20 +149,33 @@ export default function Footer() {
               </Typography>
 
               <Stack spacing={1.2} sx={{ flex: 1 }}>
-                <Typography variant="body2" sx={linkSx}>
-                  代表者：{representative}
-                </Typography>
-                <Typography variant="body2" sx={linkSx}>
-                  所在地：{location}
-                </Typography>
+                <Stack direction="row" spacing={1} alignItems="center" sx={linkSx}>
+                  <PersonOutlineOutlinedIcon sx={{ fontSize: 18 }} />
+                  <Typography variant="body2" sx={{ color: "inherit" }}>
+                    代表者：{representative}
+                  </Typography>
+                </Stack>
+                <Stack direction="row" spacing={1} alignItems="center" sx={linkSx}>
+                  <PlaceOutlinedIcon sx={{ fontSize: 18 }} />
+                  <Typography variant="body2" sx={{ color: "inherit" }}>
+                    所在地：{location}
+                  </Typography>
+                </Stack>
                 {email ? (
-                  <AppLink href={`mailto:${email}`} sx={linkSx}>
+                  <AppLink
+                    href={`mailto:${email}`}
+                    sx={{ ...linkSx, display: "inline-flex", alignItems: "center", gap: 1 }}
+                  >
+                    <MailOutlineOutlinedIcon sx={{ fontSize: 18 }} />
                     メール：{email}
                   </AppLink>
                 ) : (
-                  <Typography variant="body2" sx={linkSx}>
-                    メール：—
-                  </Typography>
+                  <Stack direction="row" spacing={1} alignItems="center" sx={linkSx}>
+                    <MailOutlineOutlinedIcon sx={{ fontSize: 18 }} />
+                    <Typography variant="body2" sx={{ color: "inherit" }}>
+                      メール：—
+                    </Typography>
+                  </Stack>
                 )}
               </Stack>
             </Stack>
@@ -157,11 +189,20 @@ export default function Footer() {
                 Company
               </Typography>
               <Stack spacing={1.2}>
-                {companyLinks.map((item) => (
-                  <AppLink key={item.label} href={item.href} sx={linkSx}>
-                    {item.label}
-                  </AppLink>
-                ))}
+                {companyLinks.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <AppLink
+                      key={item.label}
+                      href={item.href}
+                      sx={{ ...linkSx, display: "inline-flex", alignItems: "center", gap: 1 }}
+                    >
+                      <Icon sx={{ fontSize: 18 }} />
+                      {item.label}
+                    </AppLink>
+                  );
+                })}
               </Stack>
             </Stack>
           </Grid>
@@ -174,11 +215,20 @@ export default function Footer() {
                 Legal
               </Typography>
               <Stack spacing={1.2} sx={{ flex: 1 }}>
-                {legalLinks.map((item) => (
-                  <AppLink key={item.label} href={item.href} sx={linkSx}>
-                    {item.label}
-                  </AppLink>
-                ))}
+                {legalLinks.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <AppLink
+                      key={item.label}
+                      href={item.href}
+                      sx={{ ...linkSx, display: "inline-flex", alignItems: "center", gap: 1 }}
+                    >
+                      <Icon sx={{ fontSize: 18 }} />
+                      {item.label}
+                    </AppLink>
+                  );
+                })}
                 <Typography
                   variant="caption"
                   sx={{

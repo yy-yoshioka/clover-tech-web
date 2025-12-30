@@ -7,12 +7,21 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import HubOutlinedIcon from "@mui/icons-material/HubOutlined";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import { services } from "@/src/data/services";
 import { brandColors } from "@/src/theme/colors";
 
 const accentColors = [brandColors.primary, brandColors.secondary, brandColors.tertiary];
+const serviceIcons: Record<string, SvgIconComponent> = {
+  code: CodeOutlinedIcon,
+  people: GroupsOutlinedIcon,
+  dataset: HubOutlinedIcon,
+};
 
 export default function Services() {
   return (
@@ -37,6 +46,7 @@ export default function Services() {
         <Grid container spacing={{ xs: 2.5, md: 3.5 }} sx={{ mt: { xs: 3, md: 4 } }}>
           {services.map((service, index) => {
             const accent = accentColors[index % accentColors.length];
+            const Icon = serviceIcons[service.icon] ?? CodeOutlinedIcon;
 
             return (
               <Grid key={service.title} size={{ xs: 12, md: 4 }}>
@@ -68,22 +78,27 @@ export default function Services() {
                       gap: 2,
                     }}
                   >
-                    <Stack spacing={1.5} sx={{ flexGrow: 1 }}>
-                      <Stack direction="row" spacing={1} alignItems="center">
-                        <Box
-                          sx={{
-                            width: 12,
-                            height: 12,
-                            borderRadius: "50%",
-                            bgcolor: accent,
-                            boxShadow: `0 0 0 6px ${alpha(accent, 0.18)}`,
-                          }}
-                        />
-                        <Typography
-                          variant="overline"
-                          sx={{ color: accent, letterSpacing: "0.2em", fontWeight: 700 }}
-                        >
-                          Service {index + 1}
+                      <Stack spacing={1.5} sx={{ flexGrow: 1 }}>
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: "50%",
+                              bgcolor: alpha(accent, 0.12),
+                              border: `1px solid ${alpha(accent, 0.3)}`,
+                              display: "grid",
+                              placeItems: "center",
+                              color: accent,
+                            }}
+                          >
+                            <Icon sx={{ fontSize: 20 }} />
+                          </Box>
+                          <Typography
+                            variant="overline"
+                            sx={{ color: accent, letterSpacing: "0.2em", fontWeight: 700 }}
+                          >
+                            Service {index + 1}
                         </Typography>
                       </Stack>
                       <Typography variant="h6" sx={{ color: "text.primary" }}>

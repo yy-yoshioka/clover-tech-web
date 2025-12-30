@@ -4,6 +4,7 @@ export type Service = {
   bullets: string[];
   outcome: string;
   cta: string;
+  icon: string;
 };
 
 export const services: Service[] = [
@@ -13,6 +14,7 @@ export const services: Service[] = [
     bullets: ["要件定義・設計", "UI/UXと実装", "API/DB構築"],
     outcome: "最短で運用開始",
     cta: "相談する",
+    icon: "code",
   },
   {
     title: "開発リソース提供",
@@ -20,6 +22,7 @@ export const services: Service[] = [
     bullets: ["フルスタック参画", "品質・速度改善", "保守運用"],
     outcome: "開発スピード向上",
     cta: "相談する",
+    icon: "people",
   },
   {
     title: "データ収集・整形",
@@ -27,5 +30,6 @@ export const services: Service[] = [
     bullets: ["収集設計", "抽出・正規化", "可視化・納品"],
     outcome: "データ作成工数削減",
     cta: "相談する",
+    icon: "dataset",
   },
 ];

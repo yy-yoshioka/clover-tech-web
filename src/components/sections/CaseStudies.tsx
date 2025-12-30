@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import FeaturedVideoOutlinedIcon from "@mui/icons-material/FeaturedVideoOutlined";
 
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import CaseStudyCard from "@/src/components/cards/CaseStudyCard";
@@ -42,12 +43,22 @@ export default function CaseStudies({
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         {showHeading ? (
           <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-            <Typography
-              variant="overline"
-              sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              justifyContent={{ xs: "center", sm: "flex-start" }}
             >
-              Case Studies
-            </Typography>
+              <FeaturedVideoOutlinedIcon
+                sx={{ fontSize: 18, color: brandColors.tertiary }}
+              />
+              <Typography
+                variant="overline"
+                sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+              >
+                Case Studies
+              </Typography>
+            </Stack>
             <Typography variant="h4" sx={{ color: "text.primary" }}>
               開発実績
             </Typography>
