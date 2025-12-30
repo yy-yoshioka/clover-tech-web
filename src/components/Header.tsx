@@ -36,12 +36,12 @@ export default function Header() {
     return pathname === basePath || pathname.startsWith(`${basePath}/`);
   };
 
-  const navButtonSx = (active: boolean) => ({
+  const navButtonSx = (active: boolean, inactiveColor: string = "inherit") => ({
     textDecoration: active ? "underline" : "none",
     textDecorationThickness: "2px",
     textUnderlineOffset: "6px",
     textDecorationColor: brandColors.primary,
-    color: active ? brandColors.tertiary : "inherit",
+    color: active ? brandColors.tertiary : inactiveColor,
   });
 
   return (
@@ -119,10 +119,7 @@ export default function Header() {
                 display: { xs: "none", md: "inline-flex" },
                 fontSize: "0.85rem",
                 textTransform: "none",
-                color: isActive(teleapoLink.href)
-                  ? brandColors.tertiary
-                  : brandColors.secondary,
-                ...navButtonSx(isActive(teleapoLink.href)),
+                ...navButtonSx(isActive(teleapoLink.href), brandColors.secondary),
                 gap: 1,
               }}
             >
@@ -181,10 +178,7 @@ export default function Header() {
                   justifyContent: "flex-start",
                   gap: 1,
                   textTransform: "none",
-                  color: isActive(teleapoLink.href)
-                    ? brandColors.tertiary
-                    : brandColors.secondary,
-                  ...navButtonSx(isActive(teleapoLink.href)),
+                  ...navButtonSx(isActive(teleapoLink.href), brandColors.secondary),
                 }}
               >
                 {teleapoLink.label}
