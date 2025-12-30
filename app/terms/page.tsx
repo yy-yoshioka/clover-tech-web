@@ -1,8 +1,8 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
 import AppLink from "@/src/components/AppLink";
-import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
+import InternalPageLayout from "@/src/components/layouts/InternalPageLayout";
 import { brandColors } from "@/src/theme/colors";
 
 const sections = [
@@ -66,72 +66,56 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <Box
-      component="main"
-      sx={{ position: "relative", overflow: "hidden", py: { xs: 8, md: 12 } }}
+    <InternalPageLayout
+      eyebrow="Terms"
+      title="利用規約"
+      subtitle="当社のサービスをご利用いただく際の基本条件を定めています。"
+      align="center"
     >
-      <CloverBackdrop variant="section" />
-      <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-        <Stack spacing={2} sx={{ textAlign: "center", mb: { xs: 4, md: 5 } }}>
-          <Typography
-            variant="overline"
-            sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
-          >
-            Terms
-          </Typography>
-          <Typography variant="h4" sx={{ color: "text.primary" }}>
-            利用規約
-          </Typography>
-          <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-            当社のサービスをご利用いただく際の基本条件を定めています。
-          </Typography>
-          <Typography variant="caption" sx={{ color: brandColors.secondary }}>
-            最終更新日: 2025-12-29
-          </Typography>
-        </Stack>
+      <Stack spacing={1} sx={{ textAlign: "center" }}>
+        <Typography variant="caption" sx={{ color: brandColors.secondary }}>
+          最終更新日: 2025-12-29
+        </Typography>
+      </Stack>
 
-        <Box
-          sx={{
-            borderRadius: 4,
-            border: `1px solid ${alpha(brandColors.primary, 0.18)}`,
-            bgcolor: "rgba(255,255,255,0.9)",
-            p: { xs: 2.5, md: 3.5 },
-            boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
-          }}
-        >
-          <Stack spacing={2.5}>
-            {sections.map((section) => (
-              <Stack key={section.title} spacing={1.2}>
-                <Typography variant="h6" sx={{ color: "text.primary" }}>
-                  {section.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ color: brandColors.secondary }}
-                >
-                  {section.body}
-                </Typography>
-              </Stack>
-            ))}
-
-            <Stack spacing={1.2}>
+      <Box
+        sx={{
+          borderRadius: 4,
+          border: `1px solid ${alpha(brandColors.primary, 0.18)}`,
+          bgcolor: "rgba(255,255,255,0.9)",
+          p: { xs: 2.5, md: 3.5 },
+          boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+        }}
+      >
+        <Stack spacing={2.5}>
+          {sections.map((section) => (
+            <Stack key={section.title} spacing={1.2}>
               <Typography variant="h6" sx={{ color: "text.primary" }}>
-                第15条（お問い合わせ）
+                {section.title}
               </Typography>
               <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                規約に関するお問い合わせは、以下のページよりご連絡ください。
+                {section.body}
               </Typography>
-              <AppLink
-                href="/contact"
-                underline="always"
-                sx={{ width: "fit-content" }}
-              >
-                お問い合わせページ
-              </AppLink>
             </Stack>
+          ))}
+
+          <Stack spacing={1.2}>
+            <Typography variant="h6" sx={{ color: "text.primary" }}>
+              第15条（お問い合わせ）
+            </Typography>
+            <Typography variant="body2" sx={{ color: brandColors.secondary }}>
+              規約に関するお問い合わせは、以下のページよりご連絡ください。
+            </Typography>
+            <AppLink
+              href="/contact"
+              underline="always"
+              sx={{ width: "fit-content" }}
+            >
+              お問い合わせページ
+            </AppLink>
           </Stack>
-        </Box>
-      </Container>
-    </Box>
+        </Stack>
+      </Box>
+    </InternalPageLayout>
   );
 }

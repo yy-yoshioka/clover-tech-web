@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { alpha } from "@mui/material/styles";
+import { alpha, SxProps, Theme } from "@mui/material/styles";
 
 import { brandColors } from "@/src/theme/colors";
 
@@ -8,6 +8,7 @@ type SectionHeadingProps = {
   subtitle?: string;
   eyebrow?: string;
   align?: "left" | "center";
+  titleSx?: SxProps<Theme>;
 };
 
 export default function SectionHeading({
@@ -15,9 +16,11 @@ export default function SectionHeading({
   subtitle,
   eyebrow,
   align = "left",
+  titleSx,
 }: SectionHeadingProps) {
   const textAlign = align === "center" ? "center" : { xs: "center", md: "left" };
   const alignItems = align === "center" ? "center" : { xs: "center", md: "flex-start" };
+  const titleHasBreak = title.includes("<br");
 
   return (
     <Stack spacing={1.5} sx={{ textAlign, alignItems }}>
@@ -51,8 +54,14 @@ export default function SectionHeading({
           </Typography>
         </Box>
       ) : null}
-      <Typography variant="h3" sx={{ color: "text.primary", letterSpacing: "-0.02em" }}>
-        {title}
+      <Typography
+        variant="h3"
+        sx={{ color: "text.primary", letterSpacing: "-0.02em", ...titleSx }}
+        {...(titleHasBreak
+          ? { dangerouslySetInnerHTML: { __html: title } }
+          : undefined)}
+      >
+        {titleHasBreak ? null : title}
       </Typography>
       <Box
         sx={{

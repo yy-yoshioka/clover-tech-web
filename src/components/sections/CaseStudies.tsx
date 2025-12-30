@@ -23,12 +23,14 @@ type CaseStudiesProps = {
   showCta?: boolean;
   showSubtitle?: boolean;
   showHeading?: boolean;
+  showBackdrop?: boolean;
 };
 
 export default function CaseStudies({
   showCta = true,
   showSubtitle = false,
   showHeading = true,
+  showBackdrop = true,
 }: CaseStudiesProps) {
   return (
     <Box
@@ -36,7 +38,7 @@ export default function CaseStudies({
       id="case-studies"
       sx={{ py: { xs: 7, md: 10 }, position: "relative", overflow: "hidden" }}
     >
-      <CloverBackdrop variant="section" />
+      {showBackdrop ? <CloverBackdrop variant="section" /> : null}
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         {showHeading ? (
           <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
