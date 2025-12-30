@@ -68,6 +68,7 @@ const components = [
       "条件設計→抽出→整形→スコアリング。運用しやすい形で納品します。",
     ctaLabel: "詳しく見る",
     href: "/sales-data",
+    external: false,
   },
 ] as const;
 
