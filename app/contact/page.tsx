@@ -175,6 +175,7 @@ export default function ContactPage() {
             <MenuItem value="開発→データ→AI営業">
               開発→データ→AI営業（販売開始まで一気通貫）
             </MenuItem>
+            <MenuItem value="採用">採用（業務委託・副業含む）</MenuItem>
             <MenuItem value="その他">その他</MenuItem>
           </TextField>
 

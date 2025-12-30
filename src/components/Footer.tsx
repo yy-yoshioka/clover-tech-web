@@ -7,6 +7,7 @@ import { brandColors } from "@/src/theme/colors";
 
 const companyLinks = [
   { label: "会社概要", href: "/about" },
+  { label: "採用", href: "/recruit" },
   { label: "財務情報", href: "/financials" },
   { label: "お問い合わせ", href: "/contact" },
 ];

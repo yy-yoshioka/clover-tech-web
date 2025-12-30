@@ -36,12 +36,11 @@ export default function Header() {
     return pathname === basePath || pathname.startsWith(`${basePath}/`);
   };
 
-  const navButtonSx = (active: boolean, inactiveColor: string = "inherit") => ({
+  const navButtonSx = (active: boolean) => ({
     textDecoration: active ? "underline" : "none",
     textDecorationThickness: "2px",
     textUnderlineOffset: "6px",
     textDecorationColor: brandColors.primary,
-    color: active ? brandColors.tertiary : inactiveColor,
   });
 
   return (
@@ -103,7 +102,10 @@ export default function Header() {
                     key={item.label}
                     color="inherit"
                     href={item.href}
-                    sx={navButtonSx(active)}
+                    sx={{
+                      ...navButtonSx(active),
+                      color: active ? brandColors.tertiary : "inherit",
+                    }}
                   >
                     {item.label}
                   </Button>
@@ -119,7 +121,10 @@ export default function Header() {
                 display: { xs: "none", md: "inline-flex" },
                 fontSize: "0.85rem",
                 textTransform: "none",
-                ...navButtonSx(isActive(teleapoLink.href), brandColors.secondary),
+                ...navButtonSx(isActive(teleapoLink.href)),
+                color: isActive(teleapoLink.href)
+                  ? brandColors.tertiary
+                  : brandColors.secondary,
                 gap: 1,
               }}
             >
@@ -166,6 +171,7 @@ export default function Header() {
                   sx={{
                     justifyContent: "flex-start",
                     ...navButtonSx(isActive(item.href)),
+                    color: isActive(item.href) ? brandColors.tertiary : "inherit",
                   }}
                 >
                   {item.label}
@@ -178,7 +184,10 @@ export default function Header() {
                   justifyContent: "flex-start",
                   gap: 1,
                   textTransform: "none",
-                  ...navButtonSx(isActive(teleapoLink.href), brandColors.secondary),
+                  ...navButtonSx(isActive(teleapoLink.href)),
+                  color: isActive(teleapoLink.href)
+                    ? brandColors.tertiary
+                    : brandColors.secondary,
                 }}
               >
                 {teleapoLink.label}
