@@ -7,6 +7,7 @@ type SectionHeadingProps = {
   title: string;
   subtitle?: string;
   eyebrow?: string;
+  icon?: React.ReactNode;
   align?: "left" | "center";
   titleSx?: SxProps<Theme>;
 };
@@ -15,6 +16,7 @@ export default function SectionHeading({
   title,
   subtitle,
   eyebrow,
+  icon,
   align = "left",
   titleSx,
 }: SectionHeadingProps) {
@@ -37,15 +39,27 @@ export default function SectionHeading({
             border: `1px solid ${alpha(brandColors.primary, 0.24)}`,
           }}
         >
-          <Box
-            sx={{
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
-              bgcolor: brandColors.primary,
-              boxShadow: `0 0 0 6px ${alpha(brandColors.primary, 0.16)}`,
-            }}
-          />
+          {icon ? (
+            <Box
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                color: brandColors.tertiary,
+              }}
+            >
+              {icon}
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                width: 10,
+                height: 10,
+                borderRadius: "50%",
+                bgcolor: brandColors.primary,
+                boxShadow: `0 0 0 6px ${alpha(brandColors.primary, 0.16)}`,
+              }}
+            />
+          )}
           <Typography
             variant="caption"
             sx={{ color: brandColors.tertiary, letterSpacing: "0.2em", fontWeight: 700 }}

@@ -1,6 +1,18 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { alpha } from "@mui/material/styles";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import NumbersOutlinedIcon from "@mui/icons-material/NumbersOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import ScienceOutlinedIcon from "@mui/icons-material/ScienceOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 import InternalPageLayout from "@/src/components/layouts/InternalPageLayout";
 import { companyContact, companyProfile } from "@/src/data/company";
@@ -18,6 +30,23 @@ const companyDetails = [
   ...companyContact,
   ...companyServices,
 ];
+const orderedCompanyDetails = [
+  ...companyDetails.filter((item) => item.label !== "顧問税理士"),
+  ...companyDetails.filter((item) => item.label === "顧問税理士"),
+];
+const normalizeCompanyLabel = (label: string) =>
+  label.replace(/<br\s*\/?>/g, "");
+const companyInfoIcons: Record<string, SvgIconComponent> = {
+  会社名: BusinessOutlinedIcon,
+  代表者: PersonOutlineOutlinedIcon,
+  所在地: PlaceOutlinedIcon,
+  法人番号: NumbersOutlinedIcon,
+  インボイス登録番号: ReceiptLongOutlinedIcon,
+  顧問税理士: AccountBalanceOutlinedIcon,
+  設立: EventOutlinedIcon,
+  メール: MailOutlineOutlinedIcon,
+  事業内容: WorkOutlineOutlinedIcon,
+};
 
 export default function AboutPage() {
   return (
@@ -84,15 +113,20 @@ export default function AboutPage() {
                   <Grid size={{ xs: 12, sm: 6 }}>
                     <Stack spacing={1.2}>
                       <Stack spacing={0.6}>
-                        <Typography
-                          variant="overline"
-                          sx={{
-                            color: brandColors.tertiary,
-                            letterSpacing: "0.18em",
-                          }}
-                        >
-                          Research
-                        </Typography>
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <ScienceOutlinedIcon
+                            sx={{ fontSize: 18, color: brandColors.tertiary }}
+                          />
+                          <Typography
+                            variant="overline"
+                            sx={{
+                              color: brandColors.tertiary,
+                              letterSpacing: "0.18em",
+                            }}
+                          >
+                            Research
+                          </Typography>
+                        </Stack>
                         <Box
                           sx={{
                             width: 48,
@@ -143,15 +177,20 @@ export default function AboutPage() {
                   <Grid size={{ xs: 12, sm: 6 }}>
                     <Stack spacing={1.2}>
                       <Stack spacing={0.6}>
-                        <Typography
-                          variant="overline"
-                          sx={{
-                            color: brandColors.tertiary,
-                            letterSpacing: "0.18em",
-                          }}
-                        >
-                          Story
-                        </Typography>
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <AutoStoriesOutlinedIcon
+                            sx={{ fontSize: 18, color: brandColors.tertiary }}
+                          />
+                          <Typography
+                            variant="overline"
+                            sx={{
+                              color: brandColors.tertiary,
+                              letterSpacing: "0.18em",
+                            }}
+                          >
+                            Story
+                          </Typography>
+                        </Stack>
                         <Box
                           sx={{
                             width: 48,
@@ -213,31 +252,48 @@ export default function AboutPage() {
               会社情報
             </Typography>
             <Stack spacing={2}>
-              {companyDetails.map((item, index) => (
-                <Box
-                  key={item.label}
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: { xs: "1fr", sm: "160px 1fr" },
-                    gap: 1,
-                    borderBottom:
-                      index === companyDetails.length - 1
-                        ? "none"
-                        : `1px solid ${alpha(brandColors.primary, 0.12)}`,
-                    pb: index === companyDetails.length - 1 ? 0 : 2,
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{ color: brandColors.secondary }}
+              {orderedCompanyDetails.map((item, index) => {
+                const normalizedLabel = normalizeCompanyLabel(item.label);
+                const Icon = companyInfoIcons[normalizedLabel];
+                const labelHasBreak = item.label.includes("<br");
+
+                return (
+                  <Box
+                    key={item.label}
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: { xs: "1fr", sm: "160px 1fr" },
+                      gap: 1,
+                      borderBottom:
+                        index === orderedCompanyDetails.length - 1
+                          ? "none"
+                          : `1px solid ${alpha(brandColors.primary, 0.12)}`,
+                      pb: index === orderedCompanyDetails.length - 1 ? 0 : 2,
+                    }}
                   >
-                    {item.label}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.primary" }}>
-                    {item.value}
-                  </Typography>
-                </Box>
-              ))}
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      {Icon ? (
+                        <Box
+                          component={Icon}
+                          sx={{ fontSize: 18, color: brandColors.tertiary }}
+                        />
+                      ) : null}
+                      <Typography
+                        variant="body2"
+                        sx={{ color: brandColors.secondary }}
+                        {...(labelHasBreak
+                          ? { dangerouslySetInnerHTML: { __html: item.label } }
+                          : undefined)}
+                      >
+                        {labelHasBreak ? null : item.label}
+                      </Typography>
+                    </Stack>
+                    <Typography variant="body2" sx={{ color: "text.primary" }}>
+                      {item.value}
+                    </Typography>
+                  </Box>
+                );
+              })}
             </Stack>
           </Stack>
         </Box>

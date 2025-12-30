@@ -13,16 +13,25 @@ import {
 } from "@mui/material";
 import { usePathname } from "next/navigation";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import type { SvgIconComponent } from "@mui/icons-material";
 
 import { brandColors } from "@/src/theme/colors";
 
 import AppLink from "@/src/components/AppLink";
 
-const navItems = [
-  { label: "開発実績", href: "/case-studies" },
-  { label: "会社概要", href: "/about" },
+const navItems: { label: string; href: string; icon: SvgIconComponent }[] = [
+  { label: "開発実績", href: "/case-studies", icon: WorkOutlineOutlinedIcon },
+  { label: "会社概要", href: "/about", icon: CorporateFareOutlinedIcon },
 ];
-const teleapoLink = { label: "AI営業", href: "/teleapo" };
+const teleapoLink = {
+  label: "AI営業",
+  href: "/teleapo",
+  icon: SupportAgentOutlinedIcon,
+};
 
 export default function Header() {
   const pathname = usePathname();
@@ -96,6 +105,7 @@ export default function Header() {
             >
               {navItems.map((item) => {
                 const active = isActive(item.href);
+                const Icon = item.icon;
 
                 return (
                   <Button
@@ -106,6 +116,7 @@ export default function Header() {
                       ...navButtonSx(active),
                       color: active ? brandColors.tertiary : "inherit",
                     }}
+                    startIcon={<Icon sx={{ fontSize: 18 }} />}
                   >
                     {item.label}
                   </Button>
@@ -127,6 +138,7 @@ export default function Header() {
                   : brandColors.secondary,
                 gap: 1,
               }}
+              startIcon={<teleapoLink.icon sx={{ fontSize: 18 }} />}
             >
               {teleapoLink.label}
               <Chip
@@ -142,7 +154,12 @@ export default function Header() {
                 }}
               />
             </Button>
-            <Button variant="contained" color="primary" href="/contact">
+            <Button
+              variant="contained"
+              color="primary"
+              href="/contact"
+              startIcon={<ChatOutlinedIcon sx={{ fontSize: 18 }} />}
+            >
               相談する
             </Button>
             <IconButton
@@ -173,6 +190,7 @@ export default function Header() {
                     ...navButtonSx(isActive(item.href)),
                     color: isActive(item.href) ? brandColors.tertiary : "inherit",
                   }}
+                  startIcon={<item.icon sx={{ fontSize: 18 }} />}
                 >
                   {item.label}
                 </Button>
@@ -189,6 +207,7 @@ export default function Header() {
                     ? brandColors.tertiary
                     : brandColors.secondary,
                 }}
+                startIcon={<teleapoLink.icon sx={{ fontSize: 18 }} />}
               >
                 {teleapoLink.label}
                 <Chip
@@ -210,6 +229,7 @@ export default function Header() {
               color="primary"
               href="/contact"
               onClick={() => setDrawerOpen(false)}
+              startIcon={<ChatOutlinedIcon sx={{ fontSize: 18 }} />}
             >
               相談する
             </Button>

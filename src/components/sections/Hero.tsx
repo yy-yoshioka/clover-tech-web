@@ -2,12 +2,22 @@
 
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
+import ElectricBoltOutlinedIcon from "@mui/icons-material/ElectricBoltOutlined";
+import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
+import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import { brandColors } from "@/src/theme/colors";
 
 export default function Hero() {
-  const steps = ["Build", "Dataset", "AI Sales"];
+  const steps = [
+    { label: "Build", icon: ElectricBoltOutlinedIcon },
+    { label: "Dataset", icon: DatasetOutlinedIcon },
+    { label: "AI Sales", icon: TrendingUpOutlinedIcon },
+  ];
 
   return (
     <Box
@@ -38,8 +48,12 @@ export default function Hero() {
               border: `1px solid ${alpha(brandColors.primary, 0.1)}`,
             }}
           >
-            {steps.map((step, idx) => (
-              <Stack key={step} direction="row" alignItems="center" spacing={1}>
+            {steps.map((step, idx) => {
+              const Icon = step.icon;
+
+              return (
+              <Stack key={step.label} direction="row" alignItems="center" spacing={1}>
+                <Icon sx={{ fontSize: 16, color: brandColors.tertiary }} />
                 <Typography
                   sx={{
                     fontSize: "0.8rem",
@@ -48,7 +62,7 @@ export default function Hero() {
                     letterSpacing: "0.04em",
                   }}
                 >
-                  {step}
+                  {step.label}
                 </Typography>
                 {idx < steps.length - 1 && (
                   <Box
@@ -62,7 +76,8 @@ export default function Hero() {
                   </Box>
                 )}
               </Stack>
-            ))}
+              );
+            })}
           </Stack>
 
           {/* Main headline */}
@@ -118,6 +133,7 @@ export default function Hero() {
               variant="contained"
               size="large"
               href="/contact"
+              startIcon={<ChatOutlinedIcon sx={{ fontSize: 18 }} />}
               sx={{
                 px: 4,
                 py: 1.75,
@@ -139,6 +155,7 @@ export default function Hero() {
               variant="outlined"
               size="large"
               href="/case-studies"
+              startIcon={<AssessmentOutlinedIcon sx={{ fontSize: 18 }} />}
               sx={{
                 px: 4,
                 py: 1.75,
@@ -159,14 +176,17 @@ export default function Hero() {
           </Stack>
 
           {/* Trust note */}
-          <Typography
-            sx={{
-              fontSize: "0.85rem",
-              color: "#94a3b8",
-            }}
-          >
+          <Stack direction="row" spacing={1} alignItems="center">
+            <VerifiedOutlinedIcon sx={{ fontSize: 16, color: "#94a3b8" }} />
+            <Typography
+              sx={{
+                fontSize: "0.85rem",
+                color: "#94a3b8",
+              }}
+            >
             開発のみ・データセットのみ・AI営業のみのご対応も可能
-          </Typography>
+            </Typography>
+          </Stack>
 
           {/* Service cards - minimal horizontal layout */}
           <Stack
@@ -174,11 +194,26 @@ export default function Hero() {
             spacing={{ xs: 2, sm: 3 }}
             sx={{ pt: 4, width: "100%" }}
           >
-            {[
-              { label: "Build", desc: "業務アプリ・管理画面を最短構築" },
-              { label: "Dataset", desc: "AI抽出で営業データを作成" },
-              { label: "Sell", desc: "AI営業で販売開始まで接続" },
-            ].map((item, idx) => (
+              {[
+                {
+                  label: "Build",
+                  desc: "業務アプリ・管理画面を最短構築",
+                  icon: ElectricBoltOutlinedIcon,
+                },
+                {
+                  label: "Dataset",
+                  desc: "AI抽出で営業データを作成",
+                  icon: DatasetOutlinedIcon,
+                },
+                {
+                  label: "Sell",
+                  desc: "AI営業で販売開始まで接続",
+                  icon: TrendingUpOutlinedIcon,
+                },
+              ].map((item, idx) => {
+                const Icon = item.icon;
+
+                return (
               <Box
                 key={item.label}
                 sx={{
@@ -199,19 +234,17 @@ export default function Hero() {
                   <Stack direction="row" spacing={1} alignItems="center">
                     <Box
                       sx={{
-                        width: 24,
-                        height: 24,
+                        width: 28,
+                        height: 28,
                         borderRadius: "50%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         bgcolor: alpha(brandColors.primary, 0.1),
                         color: brandColors.primary,
-                        fontSize: "0.75rem",
-                        fontWeight: 700,
                       }}
                     >
-                      {idx + 1}
+                      <Icon sx={{ fontSize: 16 }} />
                     </Box>
                     <Typography
                       sx={{
@@ -237,7 +270,8 @@ export default function Hero() {
                   </Typography>
                 </Stack>
               </Box>
-            ))}
+              );
+            })}
           </Stack>
         </Stack>
       </Container>
