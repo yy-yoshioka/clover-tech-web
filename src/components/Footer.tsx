@@ -5,12 +5,10 @@ import AppLink from "@/src/components/AppLink";
 import { companyContact, companyProfile } from "@/src/data/company";
 import { brandColors } from "@/src/theme/colors";
 
-const navLinks = [
-  { label: "サービス", href: "/#services" },
-  { label: "開発実績", href: "/#case-studies" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "お問い合わせ", href: "/#contact" },
+const companyLinks = [
   { label: "会社概要", href: "/about" },
+  { label: "財務情報", href: "/financials" },
+  { label: "お問い合わせ", href: "/contact" },
 ];
 
 const legalLinks = [
@@ -128,10 +126,10 @@ export default function Footer() {
                 variant="overline"
                 sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
               >
-                Links
+                Company
               </Typography>
               <Stack spacing={1.2}>
-                {navLinks.map((item) => (
+                {companyLinks.map((item) => (
                   <AppLink key={item.label} href={item.href} sx={linkSx}>
                     {item.label}
                   </AppLink>

@@ -1,21 +1,32 @@
 "use client";
 
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  Chip,
+  Container,
+  Drawer,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { usePathname } from "next/navigation";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 import { brandColors } from "@/src/theme/colors";
 
 import AppLink from "@/src/components/AppLink";
 
 const navItems = [
-  { label: "サービス", href: "/#services" },
-  { label: "開発実績", href: "/#case-studies" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "開発実績", href: "/case-studies" },
   { label: "会社概要", href: "/about" },
 ];
+const teleapoLink = { label: "AI営業", href: "/teleapo" };
 
 export default function Header() {
   const pathname = usePathname();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const isActive = (href: string) => {
     const basePath = href.split("#")[0];
     if (!basePath || basePath === "/") {
@@ -24,6 +35,14 @@ export default function Header() {
 
     return pathname === basePath || pathname.startsWith(`${basePath}/`);
   };
+
+  const navButtonSx = (active: boolean) => ({
+    textDecoration: active ? "underline" : "none",
+    textDecorationThickness: "2px",
+    textUnderlineOffset: "6px",
+    textDecorationColor: brandColors.primary,
+    color: active ? brandColors.tertiary : "inherit",
+  });
 
   return (
     <Box
@@ -44,7 +63,12 @@ export default function Header() {
           justifyContent="space-between"
           sx={{ py: { xs: 1.5, md: 2 } }}
         >
-          <AppLink href="/" underline="none" color="inherit" sx={{ display: "inline-flex" }}>
+          <AppLink
+            href="/"
+            underline="none"
+            color="inherit"
+            sx={{ display: "inline-flex" }}
+          >
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <Box
                 component="img"
@@ -53,7 +77,10 @@ export default function Header() {
                 sx={{ width: 44, height: 44, objectFit: "contain" }}
               />
               <Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, letterSpacing: "0.08em" }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: 700, letterSpacing: "0.08em" }}
+                >
                   Clover Tech
                 </Typography>
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>
@@ -63,7 +90,11 @@ export default function Header() {
             </Stack>
           </AppLink>
           <Stack direction="row" alignItems="center" spacing={1.5}>
-            <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
               {navItems.map((item) => {
                 const active = isActive(item.href);
 
@@ -72,25 +103,116 @@ export default function Header() {
                     key={item.label}
                     color="inherit"
                     href={item.href}
-                    sx={{
-                      textDecoration: active ? "underline" : "none",
-                      textDecorationThickness: "2px",
-                      textUnderlineOffset: "6px",
-                      textDecorationColor: brandColors.primary,
-                      color: active ? brandColors.tertiary : "inherit",
-                    }}
+                    sx={navButtonSx(active)}
                   >
-                  {item.label}
+                    {item.label}
                   </Button>
                 );
               })}
             </Stack>
-            <Button variant="contained" color="primary" href="/contact">
-              無料相談
+            <Button
+              variant="text"
+              color="inherit"
+              href={teleapoLink.href}
+              size="small"
+              sx={{
+                display: { xs: "none", md: "inline-flex" },
+                fontSize: "0.85rem",
+                textTransform: "none",
+                color: isActive(teleapoLink.href)
+                  ? brandColors.tertiary
+                  : brandColors.secondary,
+                ...navButtonSx(isActive(teleapoLink.href)),
+                gap: 1,
+              }}
+            >
+              {teleapoLink.label}
+              <Chip
+                label="架電"
+                size="small"
+                sx={{
+                  bgcolor: "rgba(255,255,255,0.9)",
+                  border: `1px solid ${brandColors.primary}`,
+                  color: brandColors.tertiary,
+                  fontWeight: 600,
+                  height: 20,
+                  "& .MuiChip-label": { px: 0.8 },
+                }}
+              />
             </Button>
+            <Button variant="contained" color="primary" href="/contact">
+              相談する
+            </Button>
+            <IconButton
+              onClick={() => setDrawerOpen(true)}
+              sx={{ display: { xs: "inline-flex", md: "none" } }}
+              aria-label="メニューを開く"
+            >
+              <MenuRoundedIcon />
+            </IconButton>
           </Stack>
         </Stack>
       </Container>
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <Box sx={{ width: 280, p: 3 }}>
+          <Stack spacing={2.5}>
+            <Stack spacing={1}>
+              {navItems.map((item) => (
+                <Button
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setDrawerOpen(false)}
+                  sx={{
+                    justifyContent: "flex-start",
+                    ...navButtonSx(isActive(item.href)),
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ))}
+              <Button
+                href={teleapoLink.href}
+                onClick={() => setDrawerOpen(false)}
+                sx={{
+                  justifyContent: "flex-start",
+                  gap: 1,
+                  textTransform: "none",
+                  color: isActive(teleapoLink.href)
+                    ? brandColors.tertiary
+                    : brandColors.secondary,
+                  ...navButtonSx(isActive(teleapoLink.href)),
+                }}
+              >
+                {teleapoLink.label}
+                <Chip
+                  label="架電"
+                  size="small"
+                  sx={{
+                    bgcolor: "rgba(255,255,255,0.9)",
+                    border: `1px solid ${brandColors.primary}`,
+                    color: brandColors.tertiary,
+                    fontWeight: 600,
+                    height: 20,
+                    "& .MuiChip-label": { px: 0.8 },
+                  }}
+                />
+              </Button>
+            </Stack>
+            <Button
+              variant="contained"
+              color="primary"
+              href="/contact"
+              onClick={() => setDrawerOpen(false)}
+            >
+              相談する
+            </Button>
+          </Stack>
+        </Box>
+      </Drawer>
     </Box>
   );
 }

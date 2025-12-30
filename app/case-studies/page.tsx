@@ -1,12 +1,22 @@
 import { Box, Card, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 
 import CaseStudies from "@/src/components/sections/CaseStudies";
+import SectionHeading from "@/src/components/SectionHeading";
 import { caseStudyArchive, caseStudyArchiveContent } from "@/src/data/caseStudies";
 
 export default function CaseStudiesPage() {
   return (
     <Box component="main" sx={{ bgcolor: "background.default", color: "text.primary" }}>
-      <CaseStudies showCta={false} />
+      <Box component="section" sx={{ py: { xs: 7, md: 9 } }}>
+        <Container maxWidth="lg">
+          <SectionHeading
+            eyebrow="Case Studies"
+            title="開発実績"
+            subtitle="匿名化した事例を中心に、解決した課題と成果をご紹介します。"
+          />
+        </Container>
+      </Box>
+      <CaseStudies showCta={false} showHeading={false} showSubtitle={false} />
       <Box component="section" sx={{ py: { xs: 7, md: 10 } }}>
         <Container maxWidth="lg">
           <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>

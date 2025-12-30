@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material";
 
+import SectionHeading from "@/src/components/SectionHeading";
 type FormState = {
   name: string;
   email: string;
@@ -79,14 +80,13 @@ export default function ContactPage() {
   return (
     <Box component="main" sx={{ bgcolor: "background.default", color: "text.primary", py: { xs: 6, md: 10 } }}>
       <Container maxWidth="sm">
-        <Stack spacing={2} sx={{ textAlign: "center", mb: 4 }}>
-          <Typography variant="overline" sx={{ color: "text.secondary", letterSpacing: "0.2em" }}>
-            Contact
-          </Typography>
-          <Typography variant="h4">お問い合わせ</Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            受託開発・開発リソース提供・営業代行のご相談をお待ちしています。
-          </Typography>
+        <Stack spacing={2} sx={{ mb: 4 }}>
+          <SectionHeading
+            eyebrow="Contact"
+            title="お問い合わせ"
+            subtitle="受託開発・開発リソース提供・営業代行のご相談をお待ちしています。"
+            align="center"
+          />
         </Stack>
         <Box
           component="form"
