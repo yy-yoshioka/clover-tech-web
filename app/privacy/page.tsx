@@ -1,8 +1,8 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
-import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
 import AppLink from "@/src/components/AppLink";
+import InternalPageLayout from "@/src/components/layouts/InternalPageLayout";
 import { brandColors } from "@/src/theme/colors";
 
 /**
@@ -65,129 +65,106 @@ const privacyPolicy = {
 
 export default function PrivacyPage() {
   return (
-    <Box
-      component="main"
-      sx={{ position: "relative", overflow: "hidden", py: { xs: 8, md: 12 } }}
+    <InternalPageLayout
+      eyebrow="Privacy Policy"
+      title="プライバシーポリシー"
+      titleSx={{
+        fontSize: { xs: "1.6rem", sm: "2.1rem", md: "2.4rem" },
+        whiteSpace: { xs: "nowrap", sm: "normal" },
+      }}
+      subtitle={`${privacyPolicy.companyName}（以下「当社」）の個人情報の取り扱いについて定めます。`}
+      align="center"
     >
-      <CloverBackdrop variant="section" />
-      <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-        <Stack spacing={4}>
-          {/* Header */}
-          <Stack spacing={1} sx={{ textAlign: "center" }}>
-            <Typography
-              variant="overline"
-              sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
-            >
-              Privacy Policy
+      <Box
+        sx={{
+          borderRadius: 4,
+          border: `1px solid ${alpha(brandColors.primary, 0.18)}`,
+          bgcolor: "rgba(255,255,255,0.9)",
+          p: { xs: 2.5, md: 3.5 },
+          boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+        }}
+      >
+        <Stack spacing={2.5}>
+          <Typography variant="body2" sx={{ color: brandColors.secondary }}>
+            {privacyPolicy.intro}
+          </Typography>
+
+          <Stack spacing={1}>
+            <Typography variant="h6" sx={{ color: "text.primary" }}>
+              {privacyPolicy.collected.title}
             </Typography>
-            <Typography variant="h4" sx={{ color: "text.primary" }}>
-              プライバシーポリシー
-            </Typography>
-            <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-              {privacyPolicy.companyName}
-              （以下「当社」）の個人情報の取り扱いについて定めます。
-            </Typography>
-          </Stack>
-
-          {/* Consolidated content block */}
-          <Box
-            sx={{
-              borderRadius: 4,
-              border: `1px solid ${alpha(brandColors.primary, 0.18)}`,
-              bgcolor: "rgba(255,255,255,0.9)",
-              p: { xs: 2.5, md: 3.5 },
-              boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
-            }}
-          >
-            <Stack spacing={2.5}>
-              <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                {privacyPolicy.intro}
-              </Typography>
-
-              <Stack spacing={1}>
-                <Typography variant="h6" sx={{ color: "text.primary" }}>
-                  {privacyPolicy.collected.title}
-                </Typography>
-                <Stack component="ul" spacing={1} sx={{ m: 0, pl: 2 }}>
-                  {privacyPolicy.collected.items.map((item) => (
-                    <Typography
-                      component="li"
-                      variant="body2"
-                      key={item}
-                      sx={{ color: brandColors.secondary }}
-                    >
-                      {item}
-                    </Typography>
-                  ))}
-                </Stack>
-              </Stack>
-
-              <Stack spacing={1}>
-                <Typography variant="h6" sx={{ color: "text.primary" }}>
-                  {privacyPolicy.purpose.title}
-                </Typography>
-                <Stack component="ul" spacing={1} sx={{ m: 0, pl: 2 }}>
-                  {privacyPolicy.purpose.items.map((item) => (
-                    <Typography
-                      component="li"
-                      variant="body2"
-                      key={item}
-                      sx={{ color: brandColors.secondary }}
-                    >
-                      {item}
-                    </Typography>
-                  ))}
-                </Stack>
-              </Stack>
-
-              {[
-                privacyPolicy.thirdParty,
-                privacyPolicy.outsourcing,
-                privacyPolicy.security,
-                privacyPolicy.retention,
-                privacyPolicy.rights,
-                privacyPolicy.changes,
-              ].map((section) => (
-                <Stack key={section.title} spacing={1}>
-                  <Typography variant="h6" sx={{ color: "text.primary" }}>
-                    {section.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: brandColors.secondary }}
-                  >
-                    {section.body}
-                  </Typography>
-                </Stack>
-              ))}
-
-              <Box
-                sx={{
-                  borderRadius: 3,
-                  border: `1px solid ${alpha(brandColors.secondary, 0.2)}`,
-                  bgcolor: alpha(brandColors.primary, 0.08),
-                  p: { xs: 2, md: 2.5 },
-                  textAlign: "center",
-                }}
-              >
+            <Stack component="ul" spacing={1} sx={{ m: 0, pl: 2 }}>
+              {privacyPolicy.collected.items.map((item) => (
                 <Typography
+                  component="li"
                   variant="body2"
+                  key={item}
                   sx={{ color: brandColors.secondary }}
                 >
-                  {privacyPolicy.contact.bodyPrefix}
-                  <AppLink
-                    href={privacyPolicy.contact.linkHref}
-                    sx={{ color: brandColors.primary, mx: 0.5 }}
-                  >
-                    {privacyPolicy.contact.linkLabel}
-                  </AppLink>
-                  {privacyPolicy.contact.bodySuffix}
+                  {item}
                 </Typography>
-              </Box>
+              ))}
             </Stack>
+          </Stack>
+
+          <Stack spacing={1}>
+            <Typography variant="h6" sx={{ color: "text.primary" }}>
+              {privacyPolicy.purpose.title}
+            </Typography>
+            <Stack component="ul" spacing={1} sx={{ m: 0, pl: 2 }}>
+              {privacyPolicy.purpose.items.map((item) => (
+                <Typography
+                  component="li"
+                  variant="body2"
+                  key={item}
+                  sx={{ color: brandColors.secondary }}
+                >
+                  {item}
+                </Typography>
+              ))}
+            </Stack>
+          </Stack>
+
+          {[
+            privacyPolicy.thirdParty,
+            privacyPolicy.outsourcing,
+            privacyPolicy.security,
+            privacyPolicy.retention,
+            privacyPolicy.rights,
+            privacyPolicy.changes,
+          ].map((section) => (
+            <Stack key={section.title} spacing={1}>
+              <Typography variant="h6" sx={{ color: "text.primary" }}>
+                {section.title}
+              </Typography>
+              <Typography variant="body2" sx={{ color: brandColors.secondary }}>
+                {section.body}
+              </Typography>
+            </Stack>
+          ))}
+
+          <Box
+            sx={{
+              borderRadius: 3,
+              border: `1px solid ${alpha(brandColors.secondary, 0.2)}`,
+              bgcolor: alpha(brandColors.primary, 0.08),
+              p: { xs: 2, md: 2.5 },
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="body2" sx={{ color: brandColors.secondary }}>
+              {privacyPolicy.contact.bodyPrefix}
+              <AppLink
+                href={privacyPolicy.contact.linkHref}
+                sx={{ color: brandColors.primary, mx: 0.5 }}
+              >
+                {privacyPolicy.contact.linkLabel}
+              </AppLink>
+              {privacyPolicy.contact.bodySuffix}
+            </Typography>
           </Box>
         </Stack>
-      </Container>
-    </Box>
+      </Box>
+    </InternalPageLayout>
   );
 }

@@ -5,16 +5,15 @@ import AppLink from "@/src/components/AppLink";
 import { companyContact, companyProfile } from "@/src/data/company";
 import { brandColors } from "@/src/theme/colors";
 
-const navLinks = [
-  { label: "サービス", href: "/#services" },
-  { label: "開発実績", href: "/#case-studies" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "お問い合わせ", href: "/#contact" },
+const companyLinks = [
   { label: "会社概要", href: "/about" },
+  { label: "採用", href: "/recruit" },
+  { label: "財務情報", href: "/financials" },
+  { label: "お問い合わせ", href: "/contact" },
 ];
 
 const legalLinks = [
-  { label: "プライバシーポリシー", href: "/privacy" },
+  { label: "Privacy Policy", href: "/privacy" },
   { label: "利用規約", href: "/terms" },
 ];
 
@@ -22,6 +21,8 @@ const linkSx = {
   color: brandColors.secondary,
   textDecoration: "none",
   fontWeight: 500,
+  fontSize: "0.875rem",
+  lineHeight: 1.6,
   textDecorationColor: "transparent",
   transition: "color 0.2s ease, text-decoration-color 0.2s ease",
   "&:hover": {
@@ -89,49 +90,74 @@ export default function Footer() {
         ))}
       </Box>
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: { xs: 6, md: 8 } }}>
-        <Grid container spacing={{ xs: 4, md: 6 }}>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Stack spacing={2}>
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <Box
-                  component="img"
-                  src="/logo/clover.png"
-                  alt="Clover Tech logo"
-                  sx={{ width: 40, height: 40, objectFit: "contain" }}
-                />
-                <Box>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, letterSpacing: "0.08em" }}>
-                    Clover Tech
-                  </Typography>
-                  <Typography variant="caption" sx={{ color: brandColors.secondary }}>
-                    クローバー合同会社
-                  </Typography>
-                </Box>
-              </Stack>
-              <Stack spacing={0.6}>
-                <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                  代表者：{representative}
-                </Typography>
-                <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                  所在地：{location}
-                </Typography>
-                <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                  メール：{email}
-                </Typography>
-              </Stack>
-            </Stack>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Stack spacing={2}>
+      <Container
+        maxWidth="lg"
+        sx={{ position: "relative", zIndex: 1, py: { xs: 6, md: 8 } }}
+      >
+        <Stack
+          direction="row"
+          spacing={1.5}
+          alignItems="center"
+          sx={{ mb: { xs: 3, md: 4 } }}
+        >
+          <Box
+            component="img"
+            src="/logo/clover.png"
+            alt="Clover Tech logo"
+            sx={{ width: 44, height: 44, objectFit: "contain" }}
+          />
+          <Box>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: 700, letterSpacing: "0.08em" }}
+            >
+              Clover Tech
+            </Typography>
+            <Typography variant="caption" sx={{ color: brandColors.secondary }}>
+              クローバー合同会社
+            </Typography>
+          </Box>
+        </Stack>
+
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
+            <Stack spacing={2} sx={{ height: "100%", flex: 1 }}>
               <Typography
                 variant="overline"
                 sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
               >
-                Links
+                Info
+              </Typography>
+
+              <Stack spacing={1.2} sx={{ flex: 1 }}>
+                <Typography variant="body2" sx={linkSx}>
+                  代表者：{representative}
+                </Typography>
+                <Typography variant="body2" sx={linkSx}>
+                  所在地：{location}
+                </Typography>
+                {email ? (
+                  <AppLink href={`mailto:${email}`} sx={linkSx}>
+                    メール：{email}
+                  </AppLink>
+                ) : (
+                  <Typography variant="body2" sx={linkSx}>
+                    メール：—
+                  </Typography>
+                )}
+              </Stack>
+            </Stack>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
+            <Stack spacing={2} sx={{ height: "100%", flex: 1 }}>
+              <Typography
+                variant="overline"
+                sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
+              >
+                Company
               </Typography>
               <Stack spacing={1.2}>
-                {navLinks.map((item) => (
+                {companyLinks.map((item) => (
                   <AppLink key={item.label} href={item.href} sx={linkSx}>
                     {item.label}
                   </AppLink>
@@ -139,24 +165,31 @@ export default function Footer() {
               </Stack>
             </Stack>
           </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Stack spacing={2}>
+          <Grid size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
+            <Stack spacing={2} sx={{ height: "100%", flex: 1 }}>
               <Typography
                 variant="overline"
                 sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
               >
                 Legal
               </Typography>
-              <Stack spacing={1.2}>
+              <Stack spacing={1.2} sx={{ flex: 1 }}>
                 {legalLinks.map((item) => (
                   <AppLink key={item.label} href={item.href} sx={linkSx}>
                     {item.label}
                   </AppLink>
                 ))}
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: alpha(brandColors.secondary, 0.85),
+                    mt: 1,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  データ収集・利用は各種規約と法令に準拠します。
+                </Typography>
               </Stack>
-              <Typography variant="body2" sx={{ color: brandColors.secondary }}>
-                データ収集・利用は各種規約と法令に準拠します。
-              </Typography>
             </Stack>
           </Grid>
         </Grid>

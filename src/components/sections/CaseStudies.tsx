@@ -22,11 +22,15 @@ const accentTheme = {
 type CaseStudiesProps = {
   showCta?: boolean;
   showSubtitle?: boolean;
+  showHeading?: boolean;
+  showBackdrop?: boolean;
 };
 
 export default function CaseStudies({
   showCta = true,
   showSubtitle = false,
+  showHeading = true,
+  showBackdrop = true,
 }: CaseStudiesProps) {
   return (
     <Box
@@ -34,28 +38,33 @@ export default function CaseStudies({
       id="case-studies"
       sx={{ py: { xs: 7, md: 10 }, position: "relative", overflow: "hidden" }}
     >
-      <CloverBackdrop variant="section" />
+      {showBackdrop ? <CloverBackdrop variant="section" /> : null}
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-          <Typography
-            variant="overline"
-            sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
-          >
-            Case Studies
-          </Typography>
-          <Typography variant="h4" sx={{ color: "text.primary" }}>
-            開発実績
-          </Typography>
-          {showSubtitle && (
+        {showHeading ? (
+          <Stack spacing={1.5} sx={{ textAlign: { xs: "center", sm: "left" } }}>
             <Typography
-              variant="body2"
-              sx={{ color: brandColors.secondary, maxWidth: 720 }}
+              variant="overline"
+              sx={{ color: brandColors.tertiary, letterSpacing: "0.2em" }}
             >
-              匿名化した事例です。
+              Case Studies
             </Typography>
-          )}
-        </Stack>
-        <Stack spacing={{ xs: 4, md: 6 }} sx={{ mt: { xs: 4, md: 6 } }}>
+            <Typography variant="h4" sx={{ color: "text.primary" }}>
+              開発実績
+            </Typography>
+            {showSubtitle ? (
+              <Typography
+                variant="body2"
+                sx={{ color: brandColors.secondary, maxWidth: 720 }}
+              >
+                匿名化した事例です。
+              </Typography>
+            ) : null}
+          </Stack>
+        ) : null}
+        <Stack
+          spacing={{ xs: 4, md: 6 }}
+          sx={{ mt: showHeading ? { xs: 4, md: 6 } : 0 }}
+        >
           {caseStudies.cases.map((item, index) => {
             const accent = accentTheme[item.accent];
             const isReversed = index % 2 === 1;

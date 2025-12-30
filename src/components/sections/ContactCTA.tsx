@@ -26,6 +26,8 @@ import { brandColors } from "@/src/theme/colors";
 export default function ContactCTA() {
   const [inquiryType, setInquiryType] = useState("contract");
   const [showOptional, setShowOptional] = useState(false);
+  const [preferredSchedule, setPreferredSchedule] = useState("");
+  const [budgetRange, setBudgetRange] = useState("");
   const labelSx = { color: brandColors.secondary };
 
   return (
@@ -210,7 +212,14 @@ export default function ContactCTA() {
                   <Collapse in={showOptional} sx={{ mt: 1.5 }}>
                     <Grid container spacing={2}>
                       <Grid size={{ xs: 12, sm: 6 }}>
-                        <TextField label="希望納期（任意）" select fullWidth InputLabelProps={{ sx: labelSx }}>
+                        <TextField
+                          label="希望納期（任意）"
+                          select
+                          fullWidth
+                          value={preferredSchedule}
+                          onChange={(event) => setPreferredSchedule(event.target.value)}
+                          InputLabelProps={{ sx: labelSx }}
+                        >
                           {["未定", "1ヶ月以内", "1〜3ヶ月", "3ヶ月以上"].map((option) => (
                             <MenuItem key={option} value={option}>
                               {option}
@@ -219,7 +228,14 @@ export default function ContactCTA() {
                         </TextField>
                       </Grid>
                       <Grid size={{ xs: 12, sm: 6 }}>
-                        <TextField label="予算レンジ（任意）" select fullWidth InputLabelProps={{ sx: labelSx }}>
+                        <TextField
+                          label="予算レンジ（任意）"
+                          select
+                          fullWidth
+                          value={budgetRange}
+                          onChange={(event) => setBudgetRange(event.target.value)}
+                          InputLabelProps={{ sx: labelSx }}
+                        >
                           {["未定", "〜50万円", "50〜150万円", "150万円以上"].map((option) => (
                             <MenuItem key={option} value={option}>
                               {option}

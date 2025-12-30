@@ -1,24 +1,13 @@
 "use client";
 
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
-import { brandColors } from "@/src/theme/colors";
 import CloverBackdrop from "@/src/components/backgrounds/CloverBackdrop";
+import { brandColors } from "@/src/theme/colors";
 
 export default function Hero() {
-  const cloverDot = `radial-gradient(circle at 30% 30%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 70% 30%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 30% 70%, ${brandColors.primary} 30%, transparent 31%), radial-gradient(circle at 70% 70%, ${brandColors.primary} 30%, transparent 31%)`;
-  const bullets = [
-    "業務アプリの受託開発（Web/管理画面/API）",
-    "要件整理 → 設計 → 実装 → 運用まで一気通貫",
-    "データ収集・整形・可視化にも対応",
-  ];
-
-  const menu = [
-    { title: "受託開発", desc: "AI×業務アプリ／管理画面／CRM／可視化" },
-    { title: "開発リソース", desc: "準委任／チーム参画／保守運用" },
-    { title: "データ収集", desc: "スクレイピング／整形／要約" },
-  ];
+  const steps = ["Build", "Dataset", "AI Sales"];
 
   return (
     <Box
@@ -26,216 +15,231 @@ export default function Hero() {
       sx={{
         position: "relative",
         overflow: "hidden",
-        py: { xs: 8, md: 12 },
+        minHeight: { xs: "auto", md: "92vh" },
+        display: "flex",
+        alignItems: "center",
+        py: { xs: 10, md: 0 },
       }}
     >
       <CloverBackdrop variant="hero" />
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <Grid container spacing={{ xs: 5, md: 8 }} alignItems="center">
-          {/* Left: Message */}
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Stack spacing={2.8} sx={{ alignItems: { xs: "flex-start", md: "center" } }}>
-              <Box
-                sx={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 1,
-                  width: "fit-content",
-                  px: 1.6,
-                  py: 0.7,
-                  borderRadius: 999,
-                  bgcolor: "rgba(255,255,255,0.85)",
-                  border: `1px solid ${alpha(brandColors.primary, 0.2)}`,
-                  boxShadow: `0 12px 32px ${alpha(brandColors.secondary, 0.12)}`,
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 16,
-                    height: 16,
-                    borderRadius: "50%",
-                    background: cloverDot,
-                  }}
-                />
+      <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
+        <Stack spacing={5} alignItems="center" textAlign="center">
+          {/* Flow indicator */}
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{
+              px: 2,
+              py: 1,
+              borderRadius: 99,
+              bgcolor: alpha(brandColors.primary, 0.06),
+              border: `1px solid ${alpha(brandColors.primary, 0.1)}`,
+            }}
+          >
+            {steps.map((step, idx) => (
+              <Stack key={step} direction="row" alignItems="center" spacing={1}>
                 <Typography
-                  variant="caption"
-                  sx={{ letterSpacing: "0.26em", fontWeight: 700, color: "text.secondary" }}
-                >
-                  CLOVER TECH
-                </Typography>
-              </Box>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontSize: { xs: "2.4rem", sm: "3rem", md: "3.6rem" },
-                  lineHeight: 1.08,
-                  letterSpacing: "-0.02em",
-                  textAlign: { xs: "left", md: "center" },
-                }}
-              >
-                業務アプリの
-                <Box
-                  component="span"
                   sx={{
-                    display: "block",
-                    background:
-                      `linear-gradient(120deg, ${brandColors.primary} 0%, ${brandColors.secondary} 100%)`,
-                    WebkitBackgroundClip: "text",
-                    color: "transparent",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: brandColors.tertiary,
+                    letterSpacing: "0.04em",
                   }}
                 >
-                  受託開発
-                </Box>
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "text.secondary",
-                  fontSize: "1.08rem",
-                  maxWidth: 520,
-                  textAlign: { xs: "left", md: "center" },
-                  mx: { md: "auto" },
-                }}
-              >
-                管理画面・CRM・データ可視化・業務自動化を、最短で形にします。
-              </Typography>
-
-              <Box
-                component="ul"
-                sx={{
-                  m: 0,
-                  p: 0,
-                  listStyle: "none",
-                  display: "grid",
-                  gap: 1.5,
-                  maxWidth: 520,
-                  width: "100%",
-                  mx: { md: "auto" },
-                }}
-              >
-                {bullets.map((b) => (
-                  <Box key={b} component="li" sx={{ display: "flex", gap: 1.5 }}>
-                    <Box
-                      sx={{
-                        mt: 0.8,
-                        width: 14,
-                        height: 14,
-                        borderRadius: "50%",
-                        background: cloverDot,
-                        flexShrink: 0,
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary", textAlign: { xs: "left", md: "center" } }}
-                    >
-                      {b}
-                    </Typography>
+                  {step}
+                </Typography>
+                {idx < steps.length - 1 && (
+                  <Box
+                    component="span"
+                    sx={{
+                      color: alpha(brandColors.primary, 0.4),
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    →
                   </Box>
-                ))}
-              </Box>
-
-              <Stack
-                direction={{ xs: "column", sm: "row" }}
-                spacing={2}
-                sx={{ pt: 1, alignItems: { xs: "stretch", md: "center" } }}
-              >
-                <Button variant="contained" color="primary" size="large" href="/contact">
-                  相談する
-                </Button>
-                <Button variant="outlined" color="primary" size="large" href="#case-studies">
-                  実績を見る
-                </Button>
-                <Button
-                  variant="text"
-                  color="primary"
-                  href="#services"
-                  sx={{ justifyContent: "flex-start" }}
-                >
-                  対応範囲を見る
-                </Button>
+                )}
               </Stack>
-            </Stack>
-          </Grid>
+            ))}
+          </Stack>
 
-          {/* Right: Menu */}
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Box
+          {/* Main headline */}
+          <Stack spacing={2.5}>
+            <Typography
+              variant="h1"
               sx={{
-                position: "relative",
+                fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.25rem" },
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: "-0.035em",
+                color: "#0f172a",
               }}
             >
+              作って終わらせない
               <Box
+                component="span"
                 sx={{
-                  position: "absolute",
-                  inset: -4,
-                  borderRadius: 5,
-                  background:
-                    `linear-gradient(130deg, ${alpha(
-                      brandColors.primary,
-                      0.28
-                    )}, ${alpha(brandColors.secondary, 0.18)})`,
-                  filter: "blur(18px)",
-                  opacity: 0.7,
-                }}
-              />
-              <Box
-                sx={{
-                  position: "relative",
-                  borderRadius: 4,
-                  border: `1px solid ${alpha(brandColors.primary, 0.2)}`,
-                  bgcolor: "rgba(255,255,255,0.86)",
-                  p: { xs: 3, md: 4 },
-                  boxShadow: "0 30px 80px rgba(15, 23, 42, 0.16)",
-                  backdropFilter: "blur(12px)",
+                  mt: 2,
+                  display: "block",
+                  background: `linear-gradient(135deg, ${brandColors.primary} 0%, ${brandColors.secondary} 100%)`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
-                <Typography
-                  variant="overline"
-                  sx={{ color: "text.secondary", letterSpacing: "0.2em" }}
-                >
-                  Services
-                </Typography>
-                <Typography variant="h5" sx={{ mt: 2 }}>
-                  提供メニュー
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ mt: 1, color: "text.secondary" }}
-                >
-                  まずは小さく作り、改善を回す形で支援します。
-                </Typography>
+                営業まで一気通貫
+              </Box>
+            </Typography>
 
-                <Stack spacing={2} sx={{ mt: 3 }}>
-                  {menu.map((item) => (
+            <Typography
+              sx={{
+                fontSize: { xs: "1.05rem", md: "1.2rem" },
+                color: "#64748b",
+                maxWidth: 520,
+                mx: "auto",
+                lineHeight: 1.7,
+              }}
+            >
+              開発 × データ × AI営業
+              <br />
+              販売開始まで、最短でつなぐ
+            </Typography>
+          </Stack>
+
+          {/* CTA buttons */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            sx={{ pt: 1 }}
+          >
+            <Button
+              variant="contained"
+              size="large"
+              href="/contact"
+              sx={{
+                px: 4,
+                py: 1.75,
+                fontSize: "1rem",
+                fontWeight: 600,
+                borderRadius: 2,
+                textTransform: "none",
+                bgcolor: brandColors.primary,
+                boxShadow: `0 4px 14px ${alpha(brandColors.primary, 0.4)}`,
+                "&:hover": {
+                  bgcolor: brandColors.secondary,
+                  boxShadow: `0 6px 20px ${alpha(brandColors.primary, 0.5)}`,
+                },
+              }}
+            >
+              無料で相談する
+            </Button>
+            <Button
+              variant="outlined"
+              size="large"
+              href="/case-studies"
+              sx={{
+                px: 4,
+                py: 1.75,
+                fontSize: "1rem",
+                fontWeight: 600,
+                borderRadius: 2,
+                textTransform: "none",
+                borderColor: alpha(brandColors.primary, 0.3),
+                color: brandColors.tertiary,
+                "&:hover": {
+                  borderColor: brandColors.primary,
+                  bgcolor: alpha(brandColors.primary, 0.04),
+                },
+              }}
+            >
+              開発実績を見る
+            </Button>
+          </Stack>
+
+          {/* Trust note */}
+          <Typography
+            sx={{
+              fontSize: "0.85rem",
+              color: "#94a3b8",
+            }}
+          >
+            開発のみ・データセットのみ・AI営業のみのご対応も可能
+          </Typography>
+
+          {/* Service cards - minimal horizontal layout */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 2, sm: 3 }}
+            sx={{ pt: 4, width: "100%" }}
+          >
+            {[
+              { label: "Build", desc: "業務アプリ・管理画面を最短構築" },
+              { label: "Dataset", desc: "AI抽出で営業データを作成" },
+              { label: "Sell", desc: "AI営業で販売開始まで接続" },
+            ].map((item, idx) => (
+              <Box
+                key={item.label}
+                sx={{
+                  flex: 1,
+                  p: 3,
+                  borderRadius: 3,
+                  bgcolor: "rgba(255,255,255,0.7)",
+                  border: `1px solid ${alpha(brandColors.primary, 0.08)}`,
+                  backdropFilter: "blur(8px)",
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    borderColor: alpha(brandColors.primary, 0.2),
+                    transform: "translateY(-2px)",
+                  },
+                }}
+              >
+                <Stack spacing={1.5} alignItems="center">
+                  <Stack direction="row" spacing={1} alignItems="center">
                     <Box
-                      key={item.title}
                       sx={{
-                        borderRadius: 3,
-                        border: "1px solid rgba(15, 23, 42, 0.08)",
-                        p: 2,
-                        bgcolor: "background.paper",
-                        boxShadow: "0 12px 30px rgba(15, 23, 42, 0.08)",
+                        width: 24,
+                        height: 24,
+                        borderRadius: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: alpha(brandColors.primary, 0.1),
+                        color: brandColors.primary,
+                        fontSize: "0.75rem",
+                        fontWeight: 700,
                       }}
                     >
-                      <Typography variant="subtitle1" sx={{ lineHeight: 1.2 }}>
-                        {item.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary", mt: 0.25 }}
-                      >
-                        {item.desc}
-                      </Typography>
+                      {idx + 1}
                     </Box>
-                  ))}
+                    <Typography
+                      sx={{
+                        fontSize: "0.75rem",
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
+                        color: brandColors.tertiary,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                  </Stack>
+                  <Typography
+                    sx={{
+                      fontSize: "0.9rem",
+                      color: "#475569",
+                      textAlign: "center",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {item.desc}
+                  </Typography>
                 </Stack>
               </Box>
-            </Box>
-          </Grid>
-        </Grid>
+            ))}
+          </Stack>
+        </Stack>
       </Container>
     </Box>
   );
