@@ -1,4 +1,9 @@
+"use client";
+
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { usePathname } from "next/navigation";
+
+import { brandColors } from "@/src/theme/colors";
 
 import AppLink from "@/src/components/AppLink";
 
@@ -10,6 +15,16 @@ const navItems = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const isActive = (href: string) => {
+    const basePath = href.split("#")[0];
+    if (!basePath || basePath === "/") {
+      return false;
+    }
+
+    return pathname === basePath || pathname.startsWith(`${basePath}/`);
+  };
+
   return (
     <Box
       component="header"
@@ -49,11 +64,26 @@ export default function Header() {
           </AppLink>
           <Stack direction="row" alignItems="center" spacing={1.5}>
             <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
-              {navItems.map((item) => (
-                <Button key={item.label} color="inherit" href={item.href}>
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+
+                return (
+                  <Button
+                    key={item.label}
+                    color="inherit"
+                    href={item.href}
+                    sx={{
+                      textDecoration: active ? "underline" : "none",
+                      textDecorationThickness: "2px",
+                      textUnderlineOffset: "6px",
+                      textDecorationColor: brandColors.primary,
+                      color: active ? brandColors.tertiary : "inherit",
+                    }}
+                  >
                   {item.label}
-                </Button>
-              ))}
+                  </Button>
+                );
+              })}
             </Stack>
             <Button variant="contained" color="primary" href="/contact">
               無料相談
