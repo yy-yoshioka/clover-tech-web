@@ -19,7 +19,7 @@ import { brandColors } from "@/src/theme/colors";
 // AIテレアポ本体LP（別で定義しているLP）のURL
 // デプロイ環境に合わせて NEXT_PUBLIC_TELEAPO_LP_URL を設定してください
 const TELEAPO_LP_URL =
-  process.env.NEXT_PUBLIC_TELEAPO_LP_URL ?? "https://teleapo.example.com";
+  process.env.NEXT_PUBLIC_TELEAPO_LP_URL ?? "https://www.teleaposuite.com/";
 
 const steps = [
   {
